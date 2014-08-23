@@ -14,33 +14,47 @@ public class GameControllerJungle : MonoBehaviour
 	public TextAsset EntityFile;
 	public GameObject[] LevelFileObjects;
 	public GameObject[] EntityFileObjects;
+	public GameObject AudioControllerObject;
+
 	private GameObject player;
 	private Jeep player_Script;
 	private Transform player_Transform;
 	private SpriteRenderer player_Sprite;
 	private Rigidbody2D player_Rigidbody2D;
-	private List<Transform> checkpoints;
+	private List<Transform> checkpoint_Transforms;
+	private List<GameObject> checkpoint_Objects;
 	private int next_Checkpoint;
 	private Compass compass;
 	private bool level_End;
+	private AudioController audio_Controller_Script;
+
 	// Use this for initialization
 	void Start ()
 	{
-		checkpoints = new List<Transform> ();
+		// initialize lists
+		checkpoint_Transforms = new List<Transform> ();
+		checkpoint_Objects = new List<GameObject> ();
+
+		// build the level
 		level_End = false;
 		string[][] currentLevel = ReadLevel (LevelFile);
 		BuildLevel (currentLevel);
 		string[][] currentEntities = ReadLevel (EntityFile);
 		BuildEntities (currentEntities);
 
+		// get components and objects
 		player_Script = player.GetComponent<Jeep> ();
 		player_Script.Controller = this;
 		player_Transform = player.GetComponent<Transform> ();
 		player_Sprite = player.GetComponent<SpriteRenderer> ();
 		player_Rigidbody2D = player.GetComponent<Rigidbody2D> ();
-		compass = player_Transform.Find ("camera_main/compass").GetComponent<Compass> ();
 
+		compass = player_Transform.Find ("camera_main/compass").GetComponent<Compass> ();
+		audio_Controller_Script = AudioControllerObject.GetComponent<AudioController>();
+
+		// set the first checkpoint
 		next_Checkpoint = 0;
+		checkpoint_Objects [next_Checkpoint].SetActive (true);
 	}
 
 	void Update ()
@@ -92,7 +106,7 @@ public class GameControllerJungle : MonoBehaviour
 	void PointCompass ()
 	{
 		if (!level_End) {
-			Vector2 direction = (checkpoints [next_Checkpoint].position - player_Transform.position).normalized;
+			Vector2 direction = (checkpoint_Transforms [next_Checkpoint].position - player_Transform.position).normalized;
 
 			if (direction.x < -0.85f) {																// W
 				compass.PointCompass (compass.SpriteW);
@@ -145,14 +159,14 @@ public class GameControllerJungle : MonoBehaviour
 					GameObject currentObject = Instantiate (EntityFileObjects [currentObjectIndex], 
 					                                        new Vector3 (Convert.ToInt32 (entities [i] [1]), Convert.ToInt32 (entities [i] [2]), 0), 
 					                                        transform.rotation) as GameObject;
-
+					Transform currentTransform = currentObject.GetComponent<Transform> ();
 					if (currentObjectIndex == 0) {			// 0 - the player
 						player = currentObject;
 					} else if (currentObjectIndex == 1) {
-						Debug.Log (currentObject.ToString ());
-						checkpoints.Add (currentObject.GetComponent<Transform> ());
+						checkpoint_Transforms.Add (currentTransform);
+						checkpoint_Objects.Add (currentObject);
+						currentObject.SetActive (false);
 					}
-					Transform currentTransform = currentObject.GetComponent<Transform> ();
 					currentTransform.parent = EntityTransform;
 				}
 			}
@@ -162,14 +176,17 @@ public class GameControllerJungle : MonoBehaviour
 
 	public void HitCheckpoint (Transform currentCheckpoint)
 	{
-		if (next_Checkpoint < checkpoints.Count) {
-			if (checkpoints [next_Checkpoint] == currentCheckpoint) {
+		if (next_Checkpoint < checkpoint_Transforms.Count) {
+			if (checkpoint_Transforms [next_Checkpoint] == currentCheckpoint) {
 				Debug.Log ("Groovy.");
+				audio_Controller_Script.PlaySound(audio_Controller_Script.Checkpoint);
+				checkpoint_Objects [next_Checkpoint].SetActive (false);
 				next_Checkpoint++;
-				if (next_Checkpoint == checkpoints.Count)
-				{
+				if (next_Checkpoint == checkpoint_Transforms.Count) {
 					Debug.Log ("Level end!");
 					level_End = true;
+				} else {
+					checkpoint_Objects [next_Checkpoint].SetActive (true);
 				}
 			} else {
 				Debug.Log ("Already been here.");

@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GameControllerJungle.cs">
     <Files>
-      <File FileName="Assets\scripts\GameControllerJungle.cs" Line="169" Column="28" />
+      <File FileName="Assets\scripts\GameControllerJungle.cs" Line="155" Column="50" />
       <File FileName="Assets\scripts\Jeep.cs" Line="11" Column="2" />
-      <File FileName="Assets\Compass.cs" Line="21" Column="2" />
+      <File FileName="Assets\scripts\Compass.cs" Line="15" Column="37" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

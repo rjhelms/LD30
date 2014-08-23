@@ -5,25 +5,30 @@ fix screen tearing
 
 jungle level:
 
-BUG: level initalization is off by 2?
-
 add bad guys
 
 add goals
 	- collect drugs
 		- farms
-	- get to port
-	- maybe have an arrow pointing at the next destination?
+	- get to airport
 
 add other terrain etc
 
 
-city level (in its entirety)
+
+city level (in its entirety):
 	- also driving?
 	- all the sprites - also a car?
 		- buildings etc etc
 	- similar idea, find people to sell, get out of there
 
+
+
 level progression:
 	- more to collect
 	- more/faster bad guys
+
+
+
+sound effects
+music

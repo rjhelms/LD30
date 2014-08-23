@@ -11,6 +11,19 @@ TextureImporter:
     21300012: compass_6
     21300014: compass_7
     21300016: compass_8
+    21300018: ui_elements_0
+    21300020: ui_elements_1
+    21300022: ui_elements_2
+    21300024: ui_elements_3
+    21300026: ui_elements_4
+    21300028: ui_elements_5
+    21300030: ui_elements_6
+    21300032: ui_elements_7
+    21300034: ui_elements_8
+    21300036: ui_elements_9
+    21300038: ui_elements_10
+    21300040: ui_elements_11
+    21300042: ui_elements_12
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -52,7 +65,17 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: compass_1
+    - name: ui_elements_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ui_elements_1
       rect:
         serializedVersion: 2
         x: 0
@@ -62,7 +85,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: compass_2
+    - name: ui_elements_2
       rect:
         serializedVersion: 2
         x: 32
@@ -72,7 +95,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: compass_3
+    - name: ui_elements_3
       rect:
         serializedVersion: 2
         x: 64
@@ -82,7 +105,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: compass_4
+    - name: ui_elements_4
       rect:
         serializedVersion: 2
         x: 96
@@ -92,7 +115,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: compass_5
+    - name: ui_elements_5
       rect:
         serializedVersion: 2
         x: 0
@@ -102,7 +125,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: compass_6
+    - name: ui_elements_6
       rect:
         serializedVersion: 2
         x: 32
@@ -112,7 +135,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: compass_7
+    - name: ui_elements_7
       rect:
         serializedVersion: 2
         x: 64
@@ -122,11 +145,51 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: compass_8
+    - name: ui_elements_8
       rect:
         serializedVersion: 2
         x: 96
         y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ui_elements_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ui_elements_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ui_elements_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ui_elements_12
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
         width: 32
         height: 32
       alignment: 0

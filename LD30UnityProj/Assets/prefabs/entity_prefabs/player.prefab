@@ -176,7 +176,7 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6a7b7f7efc6b8d34781707712dff1c92, type: 2}
   m_IsTrigger: 0
   m_Size: {x: .5, y: .5}
   m_Center: {x: 0, y: 0}
@@ -221,6 +221,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71194bcbb60680041b763f275ac5d8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpriteW: {fileID: 21300032, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
+  SpriteNW: {fileID: 21300034, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
+  SpriteN: {fileID: 21300020, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
+  SpriteNE: {fileID: 21300022, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
+  SpriteE: {fileID: 21300024, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
+  SpriteSE: {fileID: 21300026, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
+  SpriteS: {fileID: 21300028, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
+  SpriteSW: {fileID: 21300030, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
