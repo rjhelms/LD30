@@ -14,6 +14,7 @@ public class GameControllerJungle : MonoBehaviour
 	public float PlayerSpeed = 1.0f;
 	public float PatrolSpeed = 1.0f;
 	public float PatrolChaseSpeed = 2.0f;
+	public float PatrolSightDistance = 2.0f;
 	public TextAsset LevelFile;
 	public TextAsset EntityFile;
 	public TextAsset PatrolFile;

@@ -15,11 +15,9 @@ add other terrain etc
 bad guys:
 	- army patrols
 		- when they sight player, chase him down
-			- pathfinding
 			- player can ditch them by getting to a hideout
-		- patrols move slower than player on their route
-		- move faster when they're chasing
 			- should player have a boost, with limited capacity?
+		- make something happen with patrol catches player
 
 city level (in its entirety):
 	- also driving?

@@ -108,11 +108,11 @@
      <Compile Include="Assets\AstarPathfindingProject\Utilities\ProfileHelper.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
      <Compile Include="Assets\AstarPathfindingProject\changelog.cs" />
+     <Compile Include="Assets\scripts\AudioController.cs" />
      <Compile Include="Assets\scripts\Compass.cs" />
      <Compile Include="Assets\scripts\GameControllerJungle.cs" />
      <Compile Include="Assets\scripts\Jeep.cs" />
      <Compile Include="Assets\scripts\Patrol.cs" />
-     <Compile Include="Assets\sounds\AudioController.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
      <None Include="Assets\AstarPathfindingProject\Plugins\dependencies.txt" />

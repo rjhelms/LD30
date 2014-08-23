@@ -22,7 +22,7 @@ public class Patrol : MonoBehaviour
 
 	private int nextPatrolPoint;
 	private int nextChasePoint;
-
+	private AudioSource myAudio;
 	private SpriteRenderer mySprite;
 	private Rigidbody2D myRigidBody;
 	private Seeker mySeeker;
@@ -33,6 +33,7 @@ public class Patrol : MonoBehaviour
 		mySprite = GetComponent<SpriteRenderer> ();
 		myRigidBody = GetComponent<Rigidbody2D> ();
 		mySeeker = GetComponent<Seeker>();
+		myAudio = GetComponent<AudioSource>();
 		nextPatrolPoint = 0;
 		IsPatrolling = true;
 	}
@@ -58,11 +59,21 @@ public class Patrol : MonoBehaviour
 				mySprite.sprite = SpriteS;
 			}
 		}
-
-		if (Input.GetButtonDown ("Fire1"))
+		Vector2 player_position = new Vector2(PlayerTransform.position.x, PlayerTransform.position.y);
+		if (!IsChasing && ((myRigidBody.position - player_position).magnitude < Controller.PatrolSightDistance))
 		{
 			mySeeker.StartPath (myRigidBody.position, PlayerTransform.position, OnPathComplete);
 			IsChasing = true;
+			IsReturning = false;
+		}
+
+		if (IsChasing)
+		{
+			myAudio.volume = Mathf.Lerp (myAudio.volume, 0.8f, Time.deltaTime * 2);
+		}
+		else
+		{
+			myAudio.volume = Mathf.Lerp (myAudio.volume, 0f, Time.deltaTime * 2);
 		}
 	}
 
@@ -90,7 +101,9 @@ public class Patrol : MonoBehaviour
 			{
 				movementVector *= Controller.PatrolSpeed;
 			}
-			myRigidBody.velocity = movementVector;
+			float new_x_vel = Mathf.Lerp (myRigidBody.velocity.x, movementVector.x, Time.fixedDeltaTime * 10);
+			float new_y_vel = Mathf.Lerp (myRigidBody.velocity.y, movementVector.y, Time.fixedDeltaTime * 10);
+			myRigidBody.velocity = new Vector2(new_x_vel, new_y_vel);
 			if ((nextPoint - myRigidBody.position).magnitude < NextWayPointDistance)
 				nextChasePoint++;
 			if (nextChasePoint >= Path.vectorPath.Count)
