@@ -48,7 +48,7 @@ public class Jeep : MonoBehaviour
 	{
 		if (col.tag == "Checkpoint")
 		{
-			Controller.HitCheckpoint(col.gameObject);
+			Controller.HitCheckpoint(col.transform);
 		}
 	}
 }

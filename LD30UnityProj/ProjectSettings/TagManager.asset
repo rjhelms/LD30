@@ -42,11 +42,15 @@ TagManager:
     userID: 1
     uniqueID: 2044336623
     locked: 0
-  - name: Roads
+  - name: Level
     userID: 2
     uniqueID: 1963536867
     locked: 0
   - name: Default
     userID: 0
     uniqueID: 0
+    locked: 0
+  - name: UI
+    userID: 3
+    uniqueID: 2276771689
     locked: 0

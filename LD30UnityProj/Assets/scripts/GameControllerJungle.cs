@@ -14,36 +14,40 @@ public class GameControllerJungle : MonoBehaviour
 	public TextAsset EntityFile;
 	public GameObject[] LevelFileObjects;
 	public GameObject[] EntityFileObjects;
-
 	private GameObject player;
 	private Jeep player_Script;
 	private Transform player_Transform;
 	private SpriteRenderer player_Sprite;
 	private Rigidbody2D player_Rigidbody2D;
-
-	private List<GameObject> checkpoints;
-	private int nextCheckpoint;
-	
+	private List<Transform> checkpoints;
+	private int next_Checkpoint;
+	private Compass compass;
+	private bool level_End;
 	// Use this for initialization
 	void Start ()
 	{
-		checkpoints = new List<GameObject>();
-
+		checkpoints = new List<Transform> ();
+		level_End = false;
 		string[][] currentLevel = ReadLevel (LevelFile);
 		BuildLevel (currentLevel);
 		string[][] currentEntities = ReadLevel (EntityFile);
 		BuildEntities (currentEntities);
 
-		player_Script = player.GetComponent<Jeep>();
+		player_Script = player.GetComponent<Jeep> ();
 		player_Script.Controller = this;
 		player_Transform = player.GetComponent<Transform> ();
 		player_Sprite = player.GetComponent<SpriteRenderer> ();
 		player_Rigidbody2D = player.GetComponent<Rigidbody2D> ();
+		compass = player_Transform.Find ("camera_main/compass").GetComponent<Compass> ();
 
-		nextCheckpoint = 0;
+		next_Checkpoint = 0;
 	}
-	
-	// Update is called once per frame
+
+	void Update ()
+	{
+		PointCompass ();
+	}
+
 	void FixedUpdate ()
 	{
 		PlayerMove ();
@@ -81,8 +85,33 @@ public class GameControllerJungle : MonoBehaviour
 			newVelocity += Vector2.right;
 		}
 
-		newVelocity.Normalize();
+		newVelocity.Normalize ();
 		player_Rigidbody2D.velocity = newVelocity * PlayerSpeed;
+	}
+
+	void PointCompass ()
+	{
+		if (!level_End) {
+			Vector2 direction = (checkpoints [next_Checkpoint].position - player_Transform.position).normalized;
+
+			if (direction.x < -0.85f) {																// W
+				compass.PointCompass (compass.SpriteW);
+			} else if ((-0.85f < direction.x) && (direction.x < -0.35f) && (direction.y > 0)) {		// NW
+				compass.PointCompass (compass.SpriteNW);
+			} else if (direction.y > 0.85f) {														// N
+				compass.PointCompass (compass.SpriteN);
+			} else if ((0.35f < direction.x) && (direction.x < 0.85f) && (direction.y > 0)) {		// NE
+				compass.PointCompass (compass.SpriteNE);
+			} else if (direction.x > 0.85f) {														// E
+				compass.PointCompass (compass.SpriteE);
+			} else if ((0.35f < direction.x) && (direction.x < 0.85f) && (direction.y < 0)) {		// SE
+				compass.PointCompass (compass.SpriteSE);
+			} else if (direction.y < -0.85f) {														// S
+				compass.PointCompass (compass.SpriteS);
+			} else if ((-0.85f < direction.x) && (direction.x < -0.35f) && (direction.y < 0)) {		// SW
+				compass.PointCompass (compass.SpriteSW);
+			}
+		}
 	}
 
 	void BuildLevel (string[][] level)
@@ -94,9 +123,9 @@ public class GameControllerJungle : MonoBehaviour
 					int currentObjectIndex = Convert.ToInt32 (currentObjectIndexString);
 					if (LevelFileObjects [currentObjectIndex] != null) {
 						float xpos = j;
-						float ypos = level.Length - (i+2);		// an off-by-two error?
+						float ypos = level.Length - (i + 2);		// an off-by-two error?
 						GameObject currentObject = Instantiate (LevelFileObjects [currentObjectIndex], 
-						                                        new Vector3 (xpos,ypos), transform.rotation) as GameObject;
+						                                        new Vector3 (xpos, ypos), transform.rotation) as GameObject;
 						Transform currentTransform = currentObject.GetComponent<Transform> ();
 						currentTransform.parent = LevelTransform;
 					}
@@ -119,13 +148,11 @@ public class GameControllerJungle : MonoBehaviour
 
 					if (currentObjectIndex == 0) {			// 0 - the player
 						player = currentObject;
+					} else if (currentObjectIndex == 1) {
+						Debug.Log (currentObject.ToString ());
+						checkpoints.Add (currentObject.GetComponent<Transform> ());
 					}
-					else if (currentObjectIndex == 1)
-					{
-						Debug.Log(currentObject.ToString());
-						checkpoints.Add (currentObject);
-					}
-					Transform currentTransform = currentObject.GetComponent<Transform>();
+					Transform currentTransform = currentObject.GetComponent<Transform> ();
 					currentTransform.parent = EntityTransform;
 				}
 			}
@@ -133,23 +160,22 @@ public class GameControllerJungle : MonoBehaviour
 		}
 	}
 
-	public void HitCheckpoint(GameObject currentCheckpoint)
+	public void HitCheckpoint (Transform currentCheckpoint)
 	{
-		if (nextCheckpoint < checkpoints.Count)
-		{
-			if (checkpoints[nextCheckpoint] == currentCheckpoint)
-			{
-				Debug.Log("Groovy.");
-				nextCheckpoint++;
-			}
-			else
-			{
+		if (next_Checkpoint < checkpoints.Count) {
+			if (checkpoints [next_Checkpoint] == currentCheckpoint) {
+				Debug.Log ("Groovy.");
+				next_Checkpoint++;
+				if (next_Checkpoint == checkpoints.Count)
+				{
+					Debug.Log ("Level end!");
+					level_End = true;
+				}
+			} else {
 				Debug.Log ("Already been here.");
 			}
-		}
-		else
-		{
-			Debug.Log ("Already been here.");
+		} else {
+			Debug.Log ("Done level");
 		}
 	}
 }
