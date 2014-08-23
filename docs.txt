@@ -19,10 +19,19 @@ _map.csv:
 		15 - road_teeU
 		16 - farmhouse_L
 		17 - farmhouse_R
+
 _entity.csv:
 	- csv file, each row is an entity
 	- type, xpos, ypos
 	- entity legend:
 		0 - player
 		1 - checkpoint
+		2 - patroller
 	- checkpoints specified in the order that the player needs to access them
+	- patrollers specified in the order that their routes appear in the _patrol.csv
+
+_patrol.cvs:
+	- csv file, each row is a point in a patrol
+	- patrol entity, xpos, ypoas
+	- will loop between them
+	- start point for the entity should be on a straight line between first point and last point

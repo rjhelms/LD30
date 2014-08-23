@@ -7,15 +7,21 @@ using System.Text.RegularExpressions;
 
 public class GameControllerJungle : MonoBehaviour
 {
+	#region Public Fields
 	public Transform LevelTransform;
 	public Transform EntityTransform;
 	public float PlayerSpeed = 1.0f;
+	public float PatrolSpeed = 1.0f;
+	public float PatrolChaseSpeed = 2.0f;
 	public TextAsset LevelFile;
 	public TextAsset EntityFile;
+	public TextAsset PatrolFile;
 	public GameObject[] LevelFileObjects;
 	public GameObject[] EntityFileObjects;
 	public GameObject AudioControllerObject;
+	#endregion
 
+	#region Private Fields
 	private GameObject player;
 	private Jeep player_Script;
 	private Transform player_Transform;
@@ -23,10 +29,12 @@ public class GameControllerJungle : MonoBehaviour
 	private Rigidbody2D player_Rigidbody2D;
 	private List<Transform> checkpoint_Transforms;
 	private List<GameObject> checkpoint_Objects;
+	private List<Transform> patrol_Transforms;
 	private int next_Checkpoint;
 	private Compass compass;
 	private bool level_End;
 	private AudioController audio_Controller_Script;
+	#endregion
 
 	// Use this for initialization
 	void Start ()
@@ -34,6 +42,7 @@ public class GameControllerJungle : MonoBehaviour
 		// initialize lists
 		checkpoint_Transforms = new List<Transform> ();
 		checkpoint_Objects = new List<GameObject> ();
+		patrol_Transforms = new List<Transform> ();
 
 		// build the level
 		level_End = false;
@@ -41,6 +50,8 @@ public class GameControllerJungle : MonoBehaviour
 		BuildLevel (currentLevel);
 		string[][] currentEntities = ReadLevel (EntityFile);
 		BuildEntities (currentEntities);
+		string[][] currentPatrols = ReadLevel (PatrolFile);
+		BuildPatrols (currentPatrols);
 
 		// get components and objects
 		player_Script = player.GetComponent<Jeep> ();
@@ -50,7 +61,7 @@ public class GameControllerJungle : MonoBehaviour
 		player_Rigidbody2D = player.GetComponent<Rigidbody2D> ();
 
 		compass = player_Transform.Find ("camera_main/compass").GetComponent<Compass> ();
-		audio_Controller_Script = AudioControllerObject.GetComponent<AudioController>();
+		audio_Controller_Script = AudioControllerObject.GetComponent<AudioController> ();
 
 		// set the first checkpoint
 		next_Checkpoint = 0;
@@ -128,16 +139,16 @@ public class GameControllerJungle : MonoBehaviour
 		}
 	}
 
-	void BuildLevel (string[][] level)
+	void BuildLevel (string[][] level_array)
 	{
-		for (int i =0; i<level.Length; i++) {
-			for (int j =0; j < level[i].Length; j++) {
-				string currentObjectIndexString = level [i] [j];
+		for (int i = 0; i < level_array.Length; i++) {
+			for (int j = 0; j < level_array[i].Length; j++) {
+				string currentObjectIndexString = level_array [i] [j];
 				if (!string.IsNullOrEmpty (currentObjectIndexString)) {
 					int currentObjectIndex = Convert.ToInt32 (currentObjectIndexString);
 					if (LevelFileObjects [currentObjectIndex] != null) {
 						float xpos = j;
-						float ypos = level.Length - (i + 2);		// an off-by-two error?
+						float ypos = level_array.Length - (i + 2);		// an off-by-two error?
 						GameObject currentObject = Instantiate (LevelFileObjects [currentObjectIndex], 
 						                                        new Vector3 (xpos, ypos), transform.rotation) as GameObject;
 						Transform currentTransform = currentObject.GetComponent<Transform> ();
@@ -148,24 +159,27 @@ public class GameControllerJungle : MonoBehaviour
 		}
 	}
 
-	void BuildEntities (string[][] entities)
+	void BuildEntities (string[][] entity_array)
 	{
-		for (int i = 0; i < entities.Length; i++) {
-			Debug.Log (i.ToString ());
-			string currentObjectIndexString = entities [i] [0];
+		for (int i = 0; i < entity_array.Length; i++) {
+			string currentObjectIndexString = entity_array [i] [0];
 			if (!string.IsNullOrEmpty (currentObjectIndexString)) {
 				int currentObjectIndex = Convert.ToInt32 (currentObjectIndexString);
 				if (EntityFileObjects [currentObjectIndex] != null) {
 					GameObject currentObject = Instantiate (EntityFileObjects [currentObjectIndex], 
-					                                        new Vector3 (Convert.ToInt32 (entities [i] [1]), Convert.ToInt32 (entities [i] [2]), 0), 
+					                                        new Vector3 (Convert.ToSingle (entity_array [i] [1]), Convert.ToSingle (entity_array [i] [2]), 0), 
 					                                        transform.rotation) as GameObject;
 					Transform currentTransform = currentObject.GetComponent<Transform> ();
 					if (currentObjectIndex == 0) {			// 0 - the player
 						player = currentObject;
-					} else if (currentObjectIndex == 1) {
+					} else if (currentObjectIndex == 1) {	// 1 - a checkpoint
 						checkpoint_Transforms.Add (currentTransform);
 						checkpoint_Objects.Add (currentObject);
 						currentObject.SetActive (false);
+					} else if (currentObjectIndex == 2) {	// 2 - a patrol
+						Patrol currentPatrol = currentObject.GetComponent<Patrol> ();
+						currentPatrol.Controller = this;
+						patrol_Transforms.Add (currentTransform);
 					}
 					currentTransform.parent = EntityTransform;
 				}
@@ -174,12 +188,26 @@ public class GameControllerJungle : MonoBehaviour
 		}
 	}
 
+	void BuildPatrols (string[][] patrol_array)
+	{
+		for (int i = 0; i < patrol_array.Length; i++) {
+			string currentObjectIndexString = patrol_array [i] [0];
+			if (!string.IsNullOrEmpty (currentObjectIndexString)) {
+
+				Vector2 next_patrol_vector = new Vector2 (Convert.ToSingle (patrol_array [i] [1]), Convert.ToSingle (patrol_array [i] [2]));
+				int patrol_index = Convert.ToInt32 (patrol_array [i] [0]);
+				Patrol currentPatrol = patrol_Transforms [patrol_index].GetComponent<Patrol> ();
+				currentPatrol.AddPatrolPoint (next_patrol_vector);
+			}
+		}
+	}
+
 	public void HitCheckpoint (Transform currentCheckpoint)
 	{
 		if (next_Checkpoint < checkpoint_Transforms.Count) {
 			if (checkpoint_Transforms [next_Checkpoint] == currentCheckpoint) {
 				Debug.Log ("Groovy.");
-				audio_Controller_Script.PlaySound(audio_Controller_Script.Checkpoint);
+				audio_Controller_Script.PlaySound (audio_Controller_Script.Checkpoint);
 				checkpoint_Objects [next_Checkpoint].SetActive (false);
 				next_Checkpoint++;
 				if (next_Checkpoint == checkpoint_Transforms.Count) {

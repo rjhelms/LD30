@@ -131,8 +131,11 @@ MonoBehaviour:
   LevelTransform: {fileID: 431476109}
   EntityTransform: {fileID: 1544414866}
   PlayerSpeed: 5
+  PatrolSpeed: 2.5
+  PatrolChaseSpeed: 2
   LevelFile: {fileID: 4900000, guid: 409f96d8515fe4646ba36ba14e65aeda, type: 3}
   EntityFile: {fileID: 4900000, guid: a3c1feaad8f010343b3535080246472c, type: 3}
+  PatrolFile: {fileID: 4900000, guid: d8970b99f269014488744b17a6553e77, type: 3}
   LevelFileObjects:
   - {fileID: 0}
   - {fileID: 100000, guid: 53b277d153cf49642af8598d495f036d, type: 2}
@@ -155,6 +158,7 @@ MonoBehaviour:
   EntityFileObjects:
   - {fileID: 100000, guid: 5e6cc4f46e505614b8a71864078b2b7f, type: 2}
   - {fileID: 100000, guid: b4a400364632c73479d6203628dc6730, type: 2}
+  - {fileID: 100002, guid: 260f5ef0d5b3013458e9ae5171507678, type: 2}
   AudioControllerObject: {fileID: 925487123}
 --- !u!4 &908098054
 Transform:
