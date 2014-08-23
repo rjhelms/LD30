@@ -7,6 +7,8 @@ public class Jeep : MonoBehaviour
 	public Sprite SpriteE;
 	public Sprite SpriteW;
 	public Sprite SpriteS;
+	public GameControllerJungle Controller;
+
 	private SpriteRenderer mySprite;
 	private Rigidbody2D myRigidBody;
 	private float angle;
@@ -40,5 +42,13 @@ public class Jeep : MonoBehaviour
 			}
 		}
 
+	}
+
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col.tag == "Checkpoint")
+		{
+			Controller.HitCheckpoint(col.gameObject);
+		}
 	}
 }

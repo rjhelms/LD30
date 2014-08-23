@@ -9,10 +9,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
-  - 61: {fileID: 6100002}
   - 61: {fileID: 6100000}
+  - 61: {fileID: 6100002}
   m_Layer: 0
-  m_Name: road_corner_SW
+  m_Name: road_teeU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,8 +39,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: .5, y: 1}
-  m_Center: {x: .25, y: 0}
+  m_Size: {x: .100000001, y: .400000006}
+  m_Center: {x: -.449999988, y: .300000012}
 --- !u!61 &6100002
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -50,8 +50,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: .5}
-  m_Center: {x: 0, y: .25}
+  m_Size: {x: .100000001, y: .400000006}
+  m_Center: {x: .449999988, y: .300000012}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 1963536867
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300030, guid: cce4f1f6f77a77f4c8c7ab370959b6fa, type: 3}
+  m_Sprite: {fileID: 21300020, guid: cce4f1f6f77a77f4c8c7ab370959b6fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

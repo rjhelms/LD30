@@ -1,0 +1,28 @@
+_map.csv:
+	- csv file, grid of tiles
+	- map legend:
+		0 - open space
+		1 - road_full
+		2 - road_horizD
+		3 - road_horizU
+		4 - road_vertL
+		5 - road_vertR
+		6 - road_intNE
+		7 - road_intNW
+		8 - road_intSE
+		9 - road_intSW
+		10 - road_corner_NE
+		11 - road_corner_NW
+		12 - road_corner_SE
+		13 - road_corner_SW
+		14 - road_teeD
+		15 - road_teeU
+		16 - farmhouse_L
+		17 - farmhouse_R
+_entity.csv:
+	- csv file, each row is an entity
+	- type, xpos, ypos
+	- entity legend:
+		0 - player
+		1 - checkpoint
+	- checkpoints specified in the order that the player needs to access them

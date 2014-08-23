@@ -1,29 +1,29 @@
-to do:
+To do:
 
-city level
-
-jungle level
+fix screen tearing
 
 
+jungle level:
+
+BUG: level initalization is off by 2?
+
+add bad guys
+
+add goals
+	- collect drugs
+		- farms
+	- get to port
+	- maybe have an arrow pointing at the next destination?
+
+add other terrain etc
 
 
+city level (in its entirety)
+	- also driving?
+	- all the sprites - also a car?
+		- buildings etc etc
+	- similar idea, find people to sell, get out of there
 
-
-
-
-
-level loader:
-	- csv file
-	- map legend:
-		0 - open space
-		1 - road_full
-		2 - road_horizD
-		3 - road_horizU
-		4 - road_vertL
-		5 - road_vertR
-		6 - road_intNE
-		7 - road_intNW
-		8 - road_intSE
-		9 - road_intSW
-	- entity legend:
-		0 - player
+level progression:
+	- more to collect
+	- more/faster bad guys

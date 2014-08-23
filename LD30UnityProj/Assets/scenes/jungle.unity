@@ -112,7 +112,7 @@ GameObject:
   - 114: {fileID: 908098053}
   m_Layer: 0
   m_Name: game_controller
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,7 +129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelTransform: {fileID: 431476109}
-  PlayerSpeed: 4
+  EntityTransform: {fileID: 1544414866}
+  PlayerSpeed: 5
   LevelFile: {fileID: 4900000, guid: 409f96d8515fe4646ba36ba14e65aeda, type: 3}
   EntityFile: {fileID: 4900000, guid: a3c1feaad8f010343b3535080246472c, type: 3}
   LevelFileObjects:
@@ -147,8 +148,13 @@ MonoBehaviour:
   - {fileID: 100000, guid: e669dc15f51b7f248a1fe1fbaa3f3f5d, type: 2}
   - {fileID: 100000, guid: 03307e90ab7f8f84388f97a79aba2c64, type: 2}
   - {fileID: 100000, guid: 1d38ac731b86e904bb6f78a5158fa743, type: 2}
+  - {fileID: 100000, guid: 2d3452d44f781c24c9823d05c8052dcb, type: 2}
+  - {fileID: 100000, guid: ffd29f9fad0f72444bcb58fe4c58d431, type: 2}
+  - {fileID: 100000, guid: 898d39041a37dd24f977cde2b8e46ec9, type: 2}
+  - {fileID: 100000, guid: 5c3b0219b26d70e4993868e2e901fe89, type: 2}
   EntityFileObjects:
   - {fileID: 100000, guid: 5e6cc4f46e505614b8a71864078b2b7f, type: 2}
+  - {fileID: 100000, guid: b4a400364632c73479d6203628dc6730, type: 2}
 --- !u!4 &908098054
 Transform:
   m_ObjectHideFlags: 0
@@ -161,3 +167,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &1544414865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1544414866}
+  m_Layer: 0
+  m_Name: entities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1544414866
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1544414865}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
