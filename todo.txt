@@ -1,0 +1,29 @@
+to do:
+
+city level
+
+jungle level
+
+
+
+
+
+
+
+
+
+level loader:
+	- csv file
+	- map legend:
+		0 - open space
+		1 - road_full
+		2 - road_horizD
+		3 - road_horizU
+		4 - road_vertL
+		5 - road_vertR
+		6 - road_intNE
+		7 - road_intNW
+		8 - road_intSE
+		9 - road_intSW
+	- entity legend:
+		0 - player
