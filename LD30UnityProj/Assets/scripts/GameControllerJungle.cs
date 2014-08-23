@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using Pathfinding;
 
 public class GameControllerJungle : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameControllerJungle : MonoBehaviour
 	public GameObject[] LevelFileObjects;
 	public GameObject[] EntityFileObjects;
 	public GameObject AudioControllerObject;
+	public GameObject Astar;
 	#endregion
 
 	#region Private Fields
@@ -34,6 +36,7 @@ public class GameControllerJungle : MonoBehaviour
 	private Compass compass;
 	private bool level_End;
 	private AudioController audio_Controller_Script;
+	private AstarPath aStarPath;
 	#endregion
 
 	// Use this for initialization
@@ -50,18 +53,17 @@ public class GameControllerJungle : MonoBehaviour
 		BuildLevel (currentLevel);
 		string[][] currentEntities = ReadLevel (EntityFile);
 		BuildEntities (currentEntities);
-		string[][] currentPatrols = ReadLevel (PatrolFile);
-		BuildPatrols (currentPatrols);
 
 		// get components and objects
-		player_Script = player.GetComponent<Jeep> ();
-		player_Script.Controller = this;
-		player_Transform = player.GetComponent<Transform> ();
-		player_Sprite = player.GetComponent<SpriteRenderer> ();
-		player_Rigidbody2D = player.GetComponent<Rigidbody2D> ();
 
 		compass = player_Transform.Find ("camera_main/compass").GetComponent<Compass> ();
 		audio_Controller_Script = AudioControllerObject.GetComponent<AudioController> ();
+		aStarPath = Astar.GetComponent<AstarPath>();
+		aStarPath.UpdateGraphs(new Pathfinding.GraphUpdateObject());
+		aStarPath.Scan();
+
+		string[][] currentPatrols = ReadLevel (PatrolFile);
+		BuildPatrols (currentPatrols);
 
 		// set the first checkpoint
 		next_Checkpoint = 0;
@@ -172,6 +174,11 @@ public class GameControllerJungle : MonoBehaviour
 					Transform currentTransform = currentObject.GetComponent<Transform> ();
 					if (currentObjectIndex == 0) {			// 0 - the player
 						player = currentObject;
+						player_Script = player.GetComponent<Jeep> ();
+						player_Script.Controller = this;
+						player_Transform = player.GetComponent<Transform> ();
+						player_Sprite = player.GetComponent<SpriteRenderer> ();
+						player_Rigidbody2D = player.GetComponent<Rigidbody2D> ();
 					} else if (currentObjectIndex == 1) {	// 1 - a checkpoint
 						checkpoint_Transforms.Add (currentTransform);
 						checkpoint_Objects.Add (currentObject);
@@ -179,6 +186,7 @@ public class GameControllerJungle : MonoBehaviour
 					} else if (currentObjectIndex == 2) {	// 2 - a patrol
 						Patrol currentPatrol = currentObject.GetComponent<Patrol> ();
 						currentPatrol.Controller = this;
+						currentPatrol.PlayerTransform = player_Transform;
 						patrol_Transforms.Add (currentTransform);
 					}
 					currentTransform.parent = EntityTransform;
@@ -222,5 +230,6 @@ public class GameControllerJungle : MonoBehaviour
 		} else {
 			Debug.Log ("Done level");
 		}
-	}
+	}	
+
 }
