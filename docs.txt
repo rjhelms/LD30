@@ -19,6 +19,10 @@ _map.csv:
 		15 - road_teeU
 		16 - farmhouse_L
 		17 - farmhouse_R
+		18 - hideout
+		19 - airport_L
+		20 - airport_M
+		21 - airport_R
 
 _entity.csv:
 	- csv file, each row is an entity
