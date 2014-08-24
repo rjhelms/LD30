@@ -6,7 +6,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Pathfinding;
 
-public class GameControllerJungle : MonoBehaviour
+public class GameController : MonoBehaviour
 {
 	#region Public Fields
 	public Transform LevelTransform;
@@ -23,6 +23,7 @@ public class GameControllerJungle : MonoBehaviour
 	public GameObject AudioControllerObject;
 	public GameObject Astar;
 	public int CheckpointScore;
+	public int LoseScore;
 	#endregion
 
 	#region Private Fields
@@ -81,9 +82,8 @@ public class GameControllerJungle : MonoBehaviour
 		next_Checkpoint = 0;
 		checkpoint_Objects [next_Checkpoint].SetActive (true);
 
-		// setup score and GUI
+		// setup score GUI
 
-		ScoreManager.Instance.Money = 10000;
 		foreach (GUIText text in FindObjectsOfType<GUIText>())
 		{
 			if (text.name.Contains("text_score"))
@@ -247,6 +247,8 @@ public class GameControllerJungle : MonoBehaviour
 				if (next_Checkpoint == checkpoint_Transforms.Count) {
 					Debug.Log ("Level end!");
 					level_End = true;
+					ScoreManager.Instance.Money += 10000;
+					Application.LoadLevel (0);
 				} else {
 					checkpoint_Objects [next_Checkpoint].SetActive (true);
 					ScoreManager.Instance.Money += CheckpointScore;
@@ -259,6 +261,12 @@ public class GameControllerJungle : MonoBehaviour
 			Debug.Log ("Done level");
 		}
 	}	
+
+	public void Lose()
+	{
+		ScoreManager.Instance.Money += LoseScore;
+		Application.LoadLevel(0);
+	}
 
 	void RenderScore ()
 	{

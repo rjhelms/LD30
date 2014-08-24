@@ -7,7 +7,7 @@ public class Jeep : MonoBehaviour
 	public Sprite SpriteE;
 	public Sprite SpriteW;
 	public Sprite SpriteS;
-	public GameControllerJungle Controller;
+	public GameController Controller;
 
 	private SpriteRenderer mySprite;
 	private Rigidbody2D myRigidBody;
@@ -43,11 +43,19 @@ public class Jeep : MonoBehaviour
 
 	}
 
+	void OnCollisionEnter2D(Collision2D col)
+	{
+		if (col.transform.tag == "Enemy")
+		{
+			Controller.Lose();
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D col)
 	{
 		if (col.tag == "Checkpoint")
 		{
 			Controller.HitCheckpoint(col.transform);
-		}
+		} 
 	}
 }

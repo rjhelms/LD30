@@ -10,7 +10,7 @@ public class Patrol : MonoBehaviour
 	public Sprite SpriteE;
 	public Sprite SpriteW;
 	public Sprite SpriteS;
-	public GameControllerJungle Controller;
+	public GameController Controller;
 	public List<Vector2> PatrolRoute;
 	public bool IsPatrolling;
 	public bool IsChasing;
