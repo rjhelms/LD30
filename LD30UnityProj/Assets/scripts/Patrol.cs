@@ -15,11 +15,9 @@ public class Patrol : MonoBehaviour
 	public bool IsPatrolling;
 	public bool IsChasing;
 	public bool IsReturning;
-
 	public float NextWayPointDistance = 0.0625f;
 	public Transform PlayerTransform;
 	public Path Path;
-
 	private int nextPatrolPoint;
 	private int nextChasePoint;
 	private AudioSource myAudio;
@@ -32,8 +30,8 @@ public class Patrol : MonoBehaviour
 	{
 		mySprite = GetComponent<SpriteRenderer> ();
 		myRigidBody = GetComponent<Rigidbody2D> ();
-		mySeeker = GetComponent<Seeker>();
-		myAudio = GetComponent<AudioSource>();
+		mySeeker = GetComponent<Seeker> ();
+		myAudio = GetComponent<AudioSource> ();
 		nextPatrolPoint = 0;
 		IsPatrolling = true;
 	}
@@ -59,26 +57,24 @@ public class Patrol : MonoBehaviour
 				mySprite.sprite = SpriteS;
 			}
 		}
-		Vector2 player_position = new Vector2(PlayerTransform.position.x, PlayerTransform.position.y);
-		if (!IsChasing && ((myRigidBody.position - player_position).magnitude < Controller.PatrolSightDistance))
-		{
+		Vector2 player_position = new Vector2 (PlayerTransform.position.x, PlayerTransform.position.y);
+		if (!IsChasing && ((myRigidBody.position - player_position).magnitude < Controller.PatrolSightDistance)) {
 			mySeeker.StartPath (myRigidBody.position, PlayerTransform.position, OnPathComplete);
 			IsChasing = true;
 			IsReturning = false;
 		}
 
-		if (IsChasing)
-		{
+		if (IsChasing) {
 			myAudio.volume = Mathf.Lerp (myAudio.volume, 0.8f, Time.deltaTime * 2);
-		}
-		else
-		{
+		} else {
 			myAudio.volume = Mathf.Lerp (myAudio.volume, 0f, Time.deltaTime * 2);
 		}
 	}
 
 	void FixedUpdate ()
 	{
+		if (!(IsPatrolling || IsChasing || IsReturning) && mySeeker.IsDone())
+		    IsPatrolling = true;
 		if (IsPatrolling) {
 			Vector2 movementVector = PatrolRoute [nextPatrolPoint] - myRigidBody.position;
 			movementVector.Normalize ();
@@ -89,33 +85,27 @@ public class Patrol : MonoBehaviour
 			if (nextPatrolPoint >= PatrolRoute.Count)
 				nextPatrolPoint = 0;
 		}
-		if (!IsPatrolling)
-		{
-			Vector2 nextPoint = new Vector2(Path.vectorPath[nextChasePoint].x, Path.vectorPath[nextChasePoint].y);
-			Vector2 movementVector = nextPoint - myRigidBody.position;
-			movementVector.Normalize ();
-			if (IsChasing)
-			{
-				movementVector *= Controller.PatrolChaseSpeed;
-			} else if (IsReturning)
-			{
-				movementVector *= Controller.PatrolSpeed;
-			}
-			float new_x_vel = Mathf.Lerp (myRigidBody.velocity.x, movementVector.x, Time.fixedDeltaTime * 10);
-			float new_y_vel = Mathf.Lerp (myRigidBody.velocity.y, movementVector.y, Time.fixedDeltaTime * 10);
-			myRigidBody.velocity = new Vector2(new_x_vel, new_y_vel);
-			if ((nextPoint - myRigidBody.position).magnitude < NextWayPointDistance)
-				nextChasePoint++;
-			if (nextChasePoint >= Path.vectorPath.Count)
-			{
-				if (IsChasing)
-				{
+		if (!IsPatrolling) {
+			if (nextChasePoint < Path.vectorPath.Count) {
+				Vector2 nextPoint = new Vector2 (Path.vectorPath [nextChasePoint].x, Path.vectorPath [nextChasePoint].y);
+				Vector2 movementVector = nextPoint - myRigidBody.position;
+				movementVector.Normalize ();
+				if (IsChasing) {
+					movementVector *= Controller.PatrolChaseSpeed;
+				} else if (IsReturning) {
+					movementVector *= Controller.PatrolSpeed;
+				}
+
+				myRigidBody.velocity = movementVector;
+
+				if ((nextPoint - myRigidBody.position).magnitude < NextWayPointDistance)
+					nextChasePoint++;
+			} else {
+				if (IsChasing && mySeeker.IsDone ()) {
 					IsChasing = false;
 					IsReturning = true;
 					mySeeker.StartPath (myRigidBody.position, PatrolRoute [nextPatrolPoint], OnPathComplete);
-				}
-				else if (IsReturning)
-				{
+				} else if (IsReturning && mySeeker.IsDone ()) {
 					IsReturning = false;
 					IsPatrolling = true;
 				}
@@ -128,10 +118,9 @@ public class Patrol : MonoBehaviour
 		PatrolRoute.Add (patrol_point);
 	}
 
-	void OnPathComplete(Path p)
+	void OnPathComplete (Path p)
 	{
-		if (!p.error)
-		{
+		if (!p.error) {
 			Path = p;
 			nextChasePoint = 0;
 			IsPatrolling = false;

@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 58: {fileID: 5800000}
   - 82: {fileID: 8200000}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: patrol
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -167,6 +167,9 @@ MonoBehaviour:
   IsReturning: 0
   NextWayPointDistance: .0625
   PlayerTransform: {fileID: 0}
+  SightLayerMask:
+    serializedVersion: 2
+    m_Bits: 257
 --- !u!212 &21200002
 SpriteRenderer:
   m_ObjectHideFlags: 1

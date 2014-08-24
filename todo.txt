@@ -1,6 +1,7 @@
 To do:
 
-fix screen tearing
+fix: pathfinder idiocy
+fix: screen tearing
 fix: movement - support arrow keys / azerty
 
 jungle level:
