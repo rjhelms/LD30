@@ -112,7 +112,10 @@
      <Compile Include="Assets\scripts\Compass.cs" />
      <Compile Include="Assets\scripts\GameControllerJungle.cs" />
      <Compile Include="Assets\scripts\Jeep.cs" />
+     <Compile Include="Assets\scripts\MonoBehaviourExtended.cs" />
      <Compile Include="Assets\scripts\Patrol.cs" />
+     <Compile Include="Assets\scripts\ScoreManager.cs" />
+     <Compile Include="Assets\scripts\Singleton.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
      <None Include="Assets\AstarPathfindingProject\Plugins\dependencies.txt" />

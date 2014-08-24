@@ -22,6 +22,7 @@ public class GameControllerJungle : MonoBehaviour
 	public GameObject[] EntityFileObjects;
 	public GameObject AudioControllerObject;
 	public GameObject Astar;
+	public int CheckpointScore;
 	#endregion
 
 	#region Private Fields
@@ -38,15 +39,20 @@ public class GameControllerJungle : MonoBehaviour
 	private bool level_End;
 	private AudioController audio_Controller_Script;
 	private AstarPath aStarPath;
+	private List<GUIText> score_Texts;
+	private string score_String;
 	#endregion
 
 	// Use this for initialization
 	void Start ()
 	{
+
+
 		// initialize lists
 		checkpoint_Transforms = new List<Transform> ();
 		checkpoint_Objects = new List<GameObject> ();
 		patrol_Transforms = new List<Transform> ();
+		score_Texts = new List<GUIText>();
 
 		// build the level
 		level_End = false;
@@ -59,9 +65,14 @@ public class GameControllerJungle : MonoBehaviour
 
 		compass = player_Transform.Find ("camera_main/compass").GetComponent<Compass> ();
 		audio_Controller_Script = AudioControllerObject.GetComponent<AudioController> ();
+
+		// initialize the pathfinder
+
 		aStarPath = Astar.GetComponent<AstarPath>();
 		aStarPath.UpdateGraphs(new Pathfinding.GraphUpdateObject());
 		aStarPath.Scan();
+
+		// build the patrollers - this needs to be done after the pathfinder is up
 
 		string[][] currentPatrols = ReadLevel (PatrolFile);
 		BuildPatrols (currentPatrols);
@@ -69,11 +80,25 @@ public class GameControllerJungle : MonoBehaviour
 		// set the first checkpoint
 		next_Checkpoint = 0;
 		checkpoint_Objects [next_Checkpoint].SetActive (true);
+
+		// setup score and GUI
+
+		ScoreManager.Instance.Money = 10000;
+		foreach (GUIText text in FindObjectsOfType<GUIText>())
+		{
+			if (text.name.Contains("text_score"))
+				score_Texts.Add (text);
+		}
+
+		RenderScore();
+
+		Debug.Log ("Money: " + ScoreManager.Instance.Money);
 	}
 
 	void Update ()
 	{
 		PointCompass ();
+		RenderScore ();
 	}
 
 	void FixedUpdate ()
@@ -224,6 +249,8 @@ public class GameControllerJungle : MonoBehaviour
 					level_End = true;
 				} else {
 					checkpoint_Objects [next_Checkpoint].SetActive (true);
+					ScoreManager.Instance.Money += CheckpointScore;
+					Debug.Log ("Money: " + ScoreManager.Instance.Money);
 				}
 			} else {
 				Debug.Log ("Already been here.");
@@ -233,4 +260,11 @@ public class GameControllerJungle : MonoBehaviour
 		}
 	}	
 
+	void RenderScore ()
+	{
+		score_String = "$" + ScoreManager.Instance.Money;
+		foreach (GUIText text in score_Texts) {
+			text.text = score_String;
+		}
+	}
 }

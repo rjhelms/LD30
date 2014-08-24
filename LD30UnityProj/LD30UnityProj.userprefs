@@ -1,12 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GameControllerJungle.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Singleton.cs">
     <Files>
       <File FileName="Assets\scripts\GameControllerJungle.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Jeep.cs" Line="13" Column="34" />
+      <File FileName="Assets\scripts\Jeep.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Compass.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Patrol.cs" Line="108" Column="49" />
-      <File FileName="Assets\AstarPathfindingProject\Core\AI\Seeker.cs" Line="97" Column="14" />
+      <File FileName="Assets\scripts\Patrol.cs" Line="1" Column="1" />
+      <File FileName="Assets\AstarPathfindingProject\Core\AI\Seeker.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\AudioController.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\MonoBehaviourExtended.cs" Line="16" Column="2" />
+      <File FileName="Assets\scripts\Singleton.cs" Line="75" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
