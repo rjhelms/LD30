@@ -1,12 +1,10 @@
 To do:
 
 must haves!!!!:
-	- city level (basically the same as...)
-	- losing on collision with patrol
-	- jungle: hideout start, air port end
-	- city: sea port start, airport end
+	- city: airport start, airport end
 	- fix pathfinder
-	- level transitions & scoring
+	- level transitions
+
 
 fix: pathfinder idiocy
 fix: screen tearing

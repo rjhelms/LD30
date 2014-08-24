@@ -129,6 +129,10 @@ Prefab:
       propertyPath: Astar
       value: 
       objectReference: {fileID: 2142386781}
+    - target: {fileID: 13200002, guid: a88dfa242d85ba744adf937a5e6867a7, type: 2}
+      propertyPath: m_Color.rgba
+      value: 4289374720
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a88dfa242d85ba744adf937a5e6867a7, type: 2}
   m_RootGameObject: {fileID: 1215317092}
@@ -4958,7 +4962,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4289374720
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!1 &1215317092
