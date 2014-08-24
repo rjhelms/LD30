@@ -24,6 +24,9 @@ public class GameController : MonoBehaviour
 	public GameObject Astar;
 	public int CheckpointScore;
 	public int LoseScore;
+	public int WinLevel;
+	public int LoseLevel;
+
 	#endregion
 
 	#region Private Fields
@@ -247,8 +250,7 @@ public class GameController : MonoBehaviour
 				if (next_Checkpoint == checkpoint_Transforms.Count) {
 					Debug.Log ("Level end!");
 					level_End = true;
-					ScoreManager.Instance.Money += 10000;
-					Application.LoadLevel (0);
+					Win();
 				} else {
 					checkpoint_Objects [next_Checkpoint].SetActive (true);
 					ScoreManager.Instance.Money += CheckpointScore;
@@ -265,7 +267,12 @@ public class GameController : MonoBehaviour
 	public void Lose()
 	{
 		ScoreManager.Instance.Money += LoseScore;
-		Application.LoadLevel(0);
+		Application.LoadLevel(LoseLevel);
+	}
+
+	public void Win()
+	{
+		Application.LoadLevel(WinLevel);
 	}
 
 	void RenderScore ()

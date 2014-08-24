@@ -131,7 +131,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: .666666687, b: 0, a: .0196078438}
+  m_BackGroundColor: {r: .666666687, g: .666666687, b: .666666687, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -205,10 +205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2165b027699be44ace07a10b2378b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteN: {fileID: 21300004, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
-  SpriteE: {fileID: 21300006, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
-  SpriteW: {fileID: 21300002, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
-  SpriteS: {fileID: 21300008, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
+  SpriteN: {fileID: 21300004, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
+  SpriteE: {fileID: 21300006, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
+  SpriteW: {fileID: 21300002, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
+  SpriteS: {fileID: 21300008, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
   Controller: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -221,14 +221,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71194bcbb60680041b763f275ac5d8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteW: {fileID: 21300032, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
-  SpriteNW: {fileID: 21300034, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
-  SpriteN: {fileID: 21300020, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
-  SpriteNE: {fileID: 21300022, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
-  SpriteE: {fileID: 21300024, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
-  SpriteSE: {fileID: 21300026, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
-  SpriteS: {fileID: 21300028, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
-  SpriteSW: {fileID: 21300030, guid: 84e38cd4b3fa1d6488fac24b83258a08, type: 3}
+  SpriteW: {fileID: 21300016, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteNW: {fileID: 21300018, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteN: {fileID: 21300004, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteNE: {fileID: 21300006, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteE: {fileID: 21300008, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteSE: {fileID: 21300010, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteS: {fileID: 21300012, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteSW: {fileID: 21300014, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -256,7 +256,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: 21300002, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21200002
 SpriteRenderer:

@@ -103,9 +103,9 @@ MonoBehaviour:
   PatrolSpeed: 2.5
   PatrolChaseSpeed: 5.125
   PatrolSightDistance: 2.75
-  LevelFile: {fileID: 4900000, guid: 409f96d8515fe4646ba36ba14e65aeda, type: 3}
-  EntityFile: {fileID: 4900000, guid: a3c1feaad8f010343b3535080246472c, type: 3}
-  PatrolFile: {fileID: 4900000, guid: d8970b99f269014488744b17a6553e77, type: 3}
+  LevelFile: {fileID: 4900000, guid: 44eb3b42122fadc41a26b412c095e59c, type: 3}
+  EntityFile: {fileID: 4900000, guid: f20890e41d81851489ade2dc726e01c9, type: 3}
+  PatrolFile: {fileID: 4900000, guid: 645be053588b6c6469ea9d0ff9b1bcfe, type: 3}
   LevelFileObjects:
   - {fileID: 0}
   - {fileID: 100000, guid: 8d33417930fb3d343a7ab134a67d330a, type: 2}
@@ -130,13 +130,15 @@ MonoBehaviour:
   - {fileID: 100000, guid: 44e99b2ea62073e4e911cf32bd5bc2f6, type: 2}
   - {fileID: 100000, guid: 3e4408678c566644c8d8a5718ff3cbb4, type: 2}
   EntityFileObjects:
-  - {fileID: 100000, guid: 5e6cc4f46e505614b8a71864078b2b7f, type: 2}
-  - {fileID: 100000, guid: b4a400364632c73479d6203628dc6730, type: 2}
-  - {fileID: 100002, guid: 260f5ef0d5b3013458e9ae5171507678, type: 2}
+  - {fileID: 100000, guid: 8020b02a7c6b3c44dad83058ff435acc, type: 2}
+  - {fileID: 100000, guid: f7133986fe1da7b4b92bb6ff600d4daf, type: 2}
+  - {fileID: 100002, guid: 3312f8a74b2c03e49b5e0018bd402e0b, type: 2}
   AudioControllerObject: {fileID: 0}
   Astar: {fileID: 0}
   CheckpointScore: 30000
-  LoseScore: 5000
+  LoseScore: -5000
+  WinLevel: 0
+  LoseLevel: 0
 --- !u!132 &13200000
 GUIText:
   m_ObjectHideFlags: 1

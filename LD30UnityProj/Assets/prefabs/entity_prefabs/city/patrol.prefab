@@ -156,10 +156,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b82fafb6a8e9640aab9f84067cdced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteN: {fileID: 21300012, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
-  SpriteE: {fileID: 21300014, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
-  SpriteW: {fileID: 21300010, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
-  SpriteS: {fileID: 21300016, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
+  SpriteN: {fileID: 21300012, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
+  SpriteE: {fileID: 21300014, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
+  SpriteW: {fileID: 21300010, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
+  SpriteS: {fileID: 21300016, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
   Controller: {fileID: 0}
   PatrolRoute: []
   IsPatrolling: 0
@@ -187,7 +187,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: 21300010, guid: bd1aa807765def343bffe414bafd1cd6, type: 3}
+  m_Sprite: {fileID: 21300010, guid: 614e1ad0bef18344a9ed8f45376f7bc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
