@@ -18,13 +18,15 @@ public class Patrol : MonoBehaviour
 	public float NextWayPointDistance = 0.0625f;
 	public Transform PlayerTransform;
 	public Path Path;
+	public float FadeSpeed;
+
 	private int nextPatrolPoint;
 	private int nextChasePoint;
 	private AudioSource myAudio;
 	private SpriteRenderer mySprite;
 	private Rigidbody2D myRigidBody;
 	private Seeker mySeeker;
-
+	private bool fading = false;
 	// Use this for initialization
 	void Start ()
 	{
@@ -75,18 +77,20 @@ public class Patrol : MonoBehaviour
 			IsReturning = false;
 		}
 
-		if (IsChasing) {
-			myAudio.volume = Mathf.Lerp (myAudio.volume, 0.6f, Time.deltaTime * 2);
-			if (!myAudio.isPlaying) {
-				myAudio.pitch = Random.Range (0.95f, 1.05f);
-				myAudio.loop = true;
-				myAudio.Play ();
-			}
-		} else {
-			myAudio.volume = Mathf.Lerp (myAudio.volume, 0f, Time.deltaTime * 2);
-			if (myAudio.isPlaying && myAudio.volume < 0.025f) {
-				myAudio.loop = false;
-				;
+		if (!fading) {
+			if (IsChasing) {
+				myAudio.volume = Mathf.Lerp (myAudio.volume, 0.6f, Time.deltaTime * 2);
+				if (!myAudio.isPlaying) {
+					myAudio.pitch = Random.Range (0.95f, 1.05f);
+					myAudio.loop = true;
+					myAudio.Play ();
+				}
+			} else {
+				myAudio.volume = Mathf.Lerp (myAudio.volume, 0f, Time.deltaTime * 2);
+				if (myAudio.isPlaying && myAudio.volume < 0.025f) {
+					myAudio.loop = false;
+					;
+				}
 			}
 		}
 	}
@@ -187,4 +191,9 @@ public class Patrol : MonoBehaviour
 		}
 	}
 
+	public void FadeOut ()
+	{
+		fading = true;
+		myAudio.volume = Mathf.Lerp (myAudio.volume, 0, FadeSpeed * Time.deltaTime);		
+	}
 }

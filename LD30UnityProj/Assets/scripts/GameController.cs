@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
 	public int WinLevel;
 	public int LoseLevel;
 	public int BoostCost;
+	public float FadeSpeed;
 	#endregion
 
 	#region Private Fields
@@ -47,9 +48,13 @@ public class GameController : MonoBehaviour
 	private AstarPath a_Star_Path;
 	private List<GUIText> score_Texts;
 	private List<GUIText> remaining_Texts;
+	private SceneFadeInOut scene_Fader;
 	private string score_String;
 	private string remaining_String;
 	private bool is_Chased;
+	private bool has_Lost = false;
+	private bool has_Won = false;
+
 	#endregion
 
 	// Use this for initialization
@@ -80,6 +85,9 @@ public class GameController : MonoBehaviour
 
 		compass = player_Transform.Find ("camera_main/compass").GetComponent<Compass> ();
 		audio_Controller_Script = AudioControllerObject.GetComponent<AudioController> ();
+		audio_Controller_Script.FadeSpeed = FadeSpeed;
+		scene_Fader = FindObjectOfType<GUITexture> ().GetComponent<SceneFadeInOut> ();
+		scene_Fader.FadeSpeed = FadeSpeed;
 
 		// initialize the pathfinder
 
@@ -91,6 +99,9 @@ public class GameController : MonoBehaviour
 
 		string[][] currentPatrols = ReadLevel (PatrolFile);
 		BuildPatrols (currentPatrols);
+		foreach (Patrol current_patrol in patrol_Scripts) {
+			current_patrol.FadeSpeed = FadeSpeed;
+		}
 
 		// set the first checkpoint
 		next_Checkpoint = 0;
@@ -117,6 +128,19 @@ public class GameController : MonoBehaviour
 		}
 		PointCompass ();
 		RenderText ();
+		if (has_Lost) {
+			scene_Fader.EndScene (LoseLevel);
+			audio_Controller_Script.FadeOut ();
+			foreach (Patrol current_patrol in patrol_Scripts) {
+				current_patrol.FadeOut ();
+			}
+		} else if (has_Won) {
+			scene_Fader.EndScene (WinLevel);
+			audio_Controller_Script.FadeOut ();
+			foreach (Patrol current_patrol in patrol_Scripts) {
+				current_patrol.FadeOut ();
+			}
+		}
 	}
 
 	void FixedUpdate ()
@@ -274,41 +298,48 @@ public class GameController : MonoBehaviour
 
 	public void HitCheckpoint (Transform currentCheckpoint)
 	{
-		if (next_Checkpoint < checkpoint_Transforms.Count) {
-			if (checkpoint_Transforms [next_Checkpoint] == currentCheckpoint) {
-				Debug.Log ("Groovy.");
-				audio_Controller_Script.PlaySound (audio_Controller_Script.Checkpoint);
-				checkpoint_Objects [next_Checkpoint].SetActive (false);
-				next_Checkpoint++;
-				if (next_Checkpoint == checkpoint_Transforms.Count) {
-					Debug.Log ("Level end!");
-					level_End = true;
-					Win ();
+		if (!has_Lost && !has_Won) {
+			if (next_Checkpoint < checkpoint_Transforms.Count) {
+				if (checkpoint_Transforms [next_Checkpoint] == currentCheckpoint) {
+					Debug.Log ("Groovy.");
+					audio_Controller_Script.PlaySound (audio_Controller_Script.Checkpoint);
+					checkpoint_Objects [next_Checkpoint].SetActive (false);
+					next_Checkpoint++;
+					if (next_Checkpoint == checkpoint_Transforms.Count) {
+						Debug.Log ("Level end!");
+						level_End = true;
+						Win ();
+					} else {
+						checkpoint_Objects [next_Checkpoint].SetActive (true);
+						ScoreManager.Instance.Money += CheckpointScore;
+						Debug.Log ("Money: " + ScoreManager.Instance.Money);
+					}
 				} else {
-					checkpoint_Objects [next_Checkpoint].SetActive (true);
-					ScoreManager.Instance.Money += CheckpointScore;
-					Debug.Log ("Money: " + ScoreManager.Instance.Money);
+					Debug.Log ("Already been here.");
 				}
 			} else {
-				Debug.Log ("Already been here.");
+				Debug.Log ("Done level");
 			}
-		} else {
-			Debug.Log ("Done level");
 		}
 	}
 
 	public void Lose ()
 	{
-		ScoreManager.Instance.Money += LoseScore;
-		Application.LoadLevel (LoseLevel);
+
+		if (!has_Lost && !has_Won) {
+			audio_Controller_Script.PlaySound (audio_Controller_Script.Lose);
+			ScoreManager.Instance.Money += LoseScore;
+			has_Lost = true;
+		}
 	}
 
 	public void Win ()
 	{
+		if (!has_Lost && !has_Won)
 		if (Application.loadedLevel % 2 != 0) {
 			ScoreManager.Instance.Checkpoints++;
 		}
-		Application.LoadLevel (WinLevel);
+		has_Won = true;
 	}
 
 	void RenderText ()
