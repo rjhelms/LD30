@@ -188,7 +188,7 @@ MonoBehaviour:
   LevelTransform: {fileID: 0}
   EntityTransform: {fileID: 0}
   PlayerSpeed: 6
-  PlayerBoostSpeed: 9
+  PlayerBoostSpeed: 8
   PatrolSpeed: 2.5
   PatrolChaseSpeed: 6
   PatrolSightDistance: 2.75

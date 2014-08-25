@@ -4,8 +4,9 @@ must haves!!!!:
 	- level transitions
 		- a message?
 	- beef up jungle level
+	- add further patrols
 	- music
-	- game win/lose scenarios
+	- game win/lose conditions
 	- intro screen?
 
 fix: compass texture for jungle scene
