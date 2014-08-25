@@ -13,8 +13,8 @@ fix: screen tearing
 
 nice to haves:
 	- hideout behaviour - all cops immediately stop chasing, won't start again for some length of time
-	- random destinations from a list
 	- more sound?
 	- more terrain
 	- # of patrols tied to level
 
+refactor: don't load extra patrols just to destroy them
