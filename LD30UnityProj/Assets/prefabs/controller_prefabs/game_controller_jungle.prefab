@@ -228,8 +228,9 @@ MonoBehaviour:
   LoseScore: -5000
   WinLevel: 2
   LoseLevel: 1
-  BoostCost: 100
+  BoostCost: 200
   FadeSpeed: 1.5
+  DriveCost: 100
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

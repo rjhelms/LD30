@@ -230,6 +230,7 @@ MonoBehaviour:
   LoseLevel: 1
   BoostCost: 1000
   FadeSpeed: 1.5
+  DriveCost: 200
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

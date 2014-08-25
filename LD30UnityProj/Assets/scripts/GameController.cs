@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
 	public int LoseLevel;
 	public int BoostCost;
 	public float FadeSpeed;
+	public int DriveCost;
 	#endregion
 
 	#region Private Fields
@@ -278,22 +279,27 @@ public class GameController : MonoBehaviour
 	void PlayerMove ()
 	{
 		Vector2 newVelocity = new Vector2 (0, 0);
-		if (!has_Lost) {									// you can't move if you're dead
+		if (!has_Lost && !has_Won) {			// don't process movement after level ending
 			// zero out velocity
 			player_Rigidbody2D.velocity = Vector2.zero;
 			newVelocity = new Vector2 (0, 0);
 
 			// process input
+			bool is_moving = false;
 			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.Z) || Input.GetKey (KeyCode.UpArrow)) {
+				is_moving = true;
 				newVelocity += Vector2.up;
 			}
 			if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
+				is_moving = true;
 				newVelocity -= Vector2.up;
 			}
 			if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.Q) || Input.GetKey (KeyCode.LeftArrow)) {
+				is_moving = true;
 				newVelocity -= Vector2.right;
 			}
 			if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.RightArrow)) {
+				is_moving = true;
 				newVelocity += Vector2.right;
 			}
 
@@ -302,10 +308,13 @@ public class GameController : MonoBehaviour
 			if ((Input.GetKey (KeyCode.Space) || Input.GetKey (KeyCode.LeftShift)) 
 				&& ScoreManager.Instance.Money > 0) { // can't boost when you're broke
 				newVelocity *= PlayerBoostSpeed;
-				ScoreManager.Instance.Money -= Convert.ToInt32 (Math.Floor ((BoostCost * Time.fixedDeltaTime)));
+				if (is_moving)
+					ScoreManager.Instance.Money -= Convert.ToInt32 (Math.Floor ((BoostCost * Time.fixedDeltaTime)));
 				if (ScoreManager.Instance.Money < 0)	// don't put money into negative by boosting
 					ScoreManager.Instance.Money = 0;
 			} else {
+				if (is_moving)
+					ScoreManager.Instance.Money -= Convert.ToInt32 (Math.Floor ((DriveCost * Time.fixedDeltaTime)));
 				newVelocity *= PlayerSpeed;
 			}
 			player_Rigidbody2D.velocity = newVelocity;
