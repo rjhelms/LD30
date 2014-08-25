@@ -39,13 +39,17 @@ public class GameController : MonoBehaviour
 	private List<Transform> checkpoint_Transforms;
 	private List<GameObject> checkpoint_Objects;
 	private List<Transform> patrol_Transforms;
+	private List<Patrol> patrol_Scripts;
 	private int next_Checkpoint;
 	private Compass compass;
 	private bool level_End;
 	private AudioController audio_Controller_Script;
-	private AstarPath aStarPath;
+	private AstarPath a_Star_Path;
 	private List<GUIText> score_Texts;
+	private List<GUIText> remaining_Texts;
 	private string score_String;
+	private string remaining_String;
+	private bool is_Chased;
 	#endregion
 
 	// Use this for initialization
@@ -57,7 +61,9 @@ public class GameController : MonoBehaviour
 		checkpoint_Transforms = new List<Transform> ();
 		checkpoint_Objects = new List<GameObject> ();
 		patrol_Transforms = new List<Transform> ();
+		patrol_Scripts = new List<Patrol> ();
 		score_Texts = new List<GUIText> ();
+		remaining_Texts = new List<GUIText> ();
 
 		// build the level
 		level_End = false;
@@ -73,9 +79,9 @@ public class GameController : MonoBehaviour
 
 		// initialize the pathfinder
 
-		aStarPath = Astar.GetComponent<AstarPath> ();
-		aStarPath.UpdateGraphs (new Pathfinding.GraphUpdateObject ());
-		aStarPath.Scan ();
+		a_Star_Path = Astar.GetComponent<AstarPath> ();
+		a_Star_Path.UpdateGraphs (new Pathfinding.GraphUpdateObject ());
+		a_Star_Path.Scan ();
 
 		// build the patrollers - this needs to be done after the pathfinder is up
 
@@ -86,22 +92,27 @@ public class GameController : MonoBehaviour
 		next_Checkpoint = 0;
 		checkpoint_Objects [next_Checkpoint].SetActive (true);
 
-		// setup score GUI
+		// setup GUI
 
 		foreach (GUIText text in FindObjectsOfType<GUIText>()) {
 			if (text.name.Contains ("text_score"))
 				score_Texts.Add (text);
+			if (text.name.Contains ("text_remaining"))
+				remaining_Texts.Add (text);
 		}
 
-		RenderScore ();
-
-		Debug.Log ("Money: " + ScoreManager.Instance.Money);
+		RenderText ();
 	}
 
 	void Update ()
 	{
+		is_Chased = false;
+		foreach (Patrol this_patrol in patrol_Scripts) {
+			if (this_patrol.IsChasing)
+				is_Chased = true;
+		}
 		PointCompass ();
-		RenderScore ();
+		RenderText ();
 	}
 
 	void FixedUpdate ()
@@ -154,7 +165,7 @@ public class GameController : MonoBehaviour
 		player_Rigidbody2D.velocity = newVelocity;
 
 		// adjust the pitch of the engine
-		float pitch = Mathf.Lerp (audio_Controller_Script.EnginePitch, newVelocity.magnitude / 3 + 0.33f, 0.2f);
+		float pitch = Mathf.Lerp (audio_Controller_Script.EnginePitch, newVelocity.magnitude / 3.6f + 0.33f, 0.2f);
 		audio_Controller_Script.EnginePitch = pitch;
 	}
 
@@ -162,7 +173,7 @@ public class GameController : MonoBehaviour
 	{
 		if (!level_End) {
 			Vector2 direction = (checkpoint_Transforms [next_Checkpoint].position - 
-			                     player_Transform.position).normalized;
+				player_Transform.position).normalized;
 
 			if (direction.x < -0.85f) {																// W
 				compass.PointCompass (compass.SpriteW);
@@ -233,6 +244,7 @@ public class GameController : MonoBehaviour
 						currentPatrol.Controller = this;
 						currentPatrol.PlayerTransform = player_Transform;
 						patrol_Transforms.Add (currentTransform);
+						patrol_Scripts.Add (currentPatrol);
 					}
 					currentTransform.parent = EntityTransform;
 				}
@@ -289,14 +301,28 @@ public class GameController : MonoBehaviour
 
 	public void Win ()
 	{
+		if (Application.loadedLevel % 2 != 0) {
+			ScoreManager.Instance.Checkpoints++;
+		}
 		Application.LoadLevel (WinLevel);
 	}
 
-	void RenderScore ()
+	void RenderText ()
 	{
 		score_String = "$" + ScoreManager.Instance.Money;
 		foreach (GUIText text in score_Texts) {
 			text.text = score_String;
+		}
+
+		int remaining_checkpoints = checkpoint_Transforms.Count - next_Checkpoint - 1;
+		if (is_Chased)
+			remaining_String = "Lose the cops!";
+		else if (remaining_checkpoints > 0)
+			remaining_String = "Remaining: " + remaining_checkpoints;
+		else
+			remaining_String = "Get to the airport!";
+		foreach (GUIText text in remaining_Texts) {
+			text.text = remaining_String;
 		}
 	}
 }

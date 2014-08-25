@@ -76,7 +76,7 @@ public class Patrol : MonoBehaviour
 		}
 
 		if (IsChasing) {
-			myAudio.volume = Mathf.Lerp (myAudio.volume, 0.8f, Time.deltaTime * 2);
+			myAudio.volume = Mathf.Lerp (myAudio.volume, 0.6f, Time.deltaTime * 2);
 			if (!myAudio.isPlaying) {
 				myAudio.pitch = Random.Range (0.95f, 1.05f);
 				myAudio.loop = true;
