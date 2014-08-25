@@ -145,22 +145,22 @@ public class GameController : MonoBehaviour
 		Vector2 newVelocity = new Vector2 (0, 0);
 
 		// process input
-		if (Input.GetKey (KeyCode.W)) {
+		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.Z) || Input.GetKey (KeyCode.UpArrow)) {
 			newVelocity += Vector2.up;
 		}
-		if (Input.GetKey (KeyCode.S)) {
+		if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
 			newVelocity -= Vector2.up;
 		}
-		if (Input.GetKey (KeyCode.A)) {
+		if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.Q) || Input.GetKey (KeyCode.LeftArrow)) {
 			newVelocity -= Vector2.right;
 		}
-		if (Input.GetKey (KeyCode.D)) {
+		if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.RightArrow)) {
 			newVelocity += Vector2.right;
 		}
 
 		// set the player velocity
 		newVelocity.Normalize ();
-		if (Input.GetKey (KeyCode.Q)) {
+		if (Input.GetKey (KeyCode.Space)) {
 			newVelocity *= PlayerBoostSpeed;
 			ScoreManager.Instance.Money -= Convert.ToInt32 (Math.Floor ((BoostCost * Time.fixedDeltaTime)));
 		} else {

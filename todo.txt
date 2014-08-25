@@ -5,12 +5,13 @@ must haves!!!!:
 		- fade in/out with a message
 	- beef up jungle level
 	- music
-
+	- game win/lose scenarios
+	- intro screen?
 
 fix: pathfinder idiocy
-	- getting stuck in driveways?
+	- getting stuck in driveways? seems fixed
+
 fix: screen tearing
-fix: movement - support arrow keys / azerty
 
 nice to haves:
 	- hideout behaviour - all cops immediately stop chasing, won't start again for some length of time
