@@ -12,6 +12,9 @@ public class TitleScreenController : MonoBehaviour
 	void Start ()
 	{
 		fader = transform.Find ("texture_black").GetComponent<SceneFadeInOut> ();
+
+		// reset the score manager.
+		ScoreManager.Instance.Reset ();
 	}
 	
 	// Update is called once per frame

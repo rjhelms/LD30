@@ -13,3 +13,7 @@ EditorBuildSettings:
     path: Assets/scenes/city.unity
   - enabled: 1
     path: Assets/scenes/instructions.unity
+  - enabled: 1
+    path: Assets/scenes/youwin.unity
+  - enabled: 1
+    path: Assets/scenes/youlose.unity

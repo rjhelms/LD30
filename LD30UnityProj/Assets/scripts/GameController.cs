@@ -26,7 +26,9 @@ public class GameController : MonoBehaviour
 	public int CheckpointScore;
 	public int LoseScore;
 	public int WinLevel;
+	public int WinGameLevel = 4;
 	public int LoseLevel;
+	public int LoseGameLevel = 5;
 	public int BoostCost;
 	public float FadeSpeed;
 	public int DriveCost;
@@ -55,6 +57,8 @@ public class GameController : MonoBehaviour
 	private bool is_Chased;
 	private bool has_Lost = false;
 	private bool has_Won = false;
+	private bool has_Lost_Game = false;
+	private bool has_Won_Game = false;
 	#endregion
 
 	// Use this for initialization
@@ -121,6 +125,11 @@ public class GameController : MonoBehaviour
 
 	void Update ()
 	{
+		if (ScoreManager.Instance.Money <= 0) {
+			has_Lost_Game = true;
+			has_Lost = true;
+		}
+
 		is_Chased = false;
 		foreach (Patrol this_patrol in patrol_Scripts) {
 			if (this_patrol.IsChasing)
@@ -128,7 +137,19 @@ public class GameController : MonoBehaviour
 		}
 		PointCompass ();
 		RenderText ();
-		if (has_Lost) {
+		if (has_Lost_Game) {
+			scene_Fader.EndScene (LoseGameLevel);
+			audio_Controller_Script.FadeOut ();
+			foreach (Patrol current_patrol in patrol_Scripts) {
+				current_patrol.FadeOut ();
+			}
+		} else if (has_Won_Game) {
+			scene_Fader.EndScene (WinGameLevel);
+			audio_Controller_Script.FadeOut ();
+			foreach (Patrol current_patrol in patrol_Scripts) {
+				current_patrol.FadeOut ();
+			}
+		} else if (has_Lost) {
 			scene_Fader.EndScene (LoseLevel);
 			audio_Controller_Script.FadeOut ();
 			foreach (Patrol current_patrol in patrol_Scripts) {
@@ -390,6 +411,9 @@ public class GameController : MonoBehaviour
 			}
 		}
 		has_Won = true;
+		if (ScoreManager.Instance.Checkpoints > ScoreManager.Instance.WinCheckpoints) {
+			has_Won_Game = true;
+		}
 	}
 
 	void RenderText ()

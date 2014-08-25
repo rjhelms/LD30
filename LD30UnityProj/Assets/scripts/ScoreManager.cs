@@ -8,8 +8,12 @@ public class ScoreManager : Singleton<ScoreManager>
 	{
 	} // guarantee this will be always a singleton only - can't use the constructor!
 
-	public int Money = 10000;
+	public int StartingMoney = 15000;
+	public int StartingCheckpoints = 1;
+
+	public int Money = 15000;
 	public int Checkpoints = 1;
+	public int WinCheckpoints = 5;
 	public int Patrols {
 		get { return (Checkpoints - 1);}
 	}
@@ -23,5 +27,11 @@ public class ScoreManager : Singleton<ScoreManager>
 	void Update ()
 	{
 	
+	}
+
+	public void Reset ()
+	{
+		Money = StartingMoney;
+		Checkpoints = StartingCheckpoints;
 	}
 }
