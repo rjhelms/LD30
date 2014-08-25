@@ -31,7 +31,7 @@ _entity.csv:
 		0 - player
 		1 - checkpoint
 		2 - patroller
-	- checkpoints specified in the order that the player needs to access them
+	- last checkpoint should always be the airport - others will be selected randomly
 	- patrollers specified in the order that their routes appear in the _patrol.csv
 
 _patrol.cvs:

@@ -1,50 +1,21 @@
 To do:
 
 must haves!!!!:
-	- fix pathfinder
 	- level transitions
 		- fade in/out with a message
+	- beef up jungle level
 	- music
-	- more sound
+
 
 fix: pathfinder idiocy
-	- behaviour at end of chase
-	- getting stuck in driveways
+	- getting stuck in driveways?
 fix: screen tearing
 fix: movement - support arrow keys / azerty
 
 nice to haves:
 	- hideout behaviour - all cops immediately stop chasing, won't start again for some length of time
 	- random destinations from a list
+	- more sound?
+	- more terrain
+	- # of patrols tied to level
 
-jungle level:
-
-add goals
-	- collect drugs
-		- farms
-	- get to airport
-
-add other terrain etc
-
-bad guys:
-	- army patrols
-		- when they sight player, chase him down
-			- player can ditch them by getting to a hideout
-			- should player have a boost, with limited capacity?
-
-city level (in its entirety):
-	- also driving?
-	- all the sprites - also a car?
-		- buildings etc etc
-	- similar idea, find people to sell, get out of there
-
-
-
-level progression:
-	- more to collect
-	- more/faster bad guys
-
-
-
-sound effects
-music

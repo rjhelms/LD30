@@ -72,6 +72,10 @@ public class GameController : MonoBehaviour
 		string[][] currentEntities = ReadLevel (EntityFile);
 		BuildEntities (currentEntities);
 
+		// select our checkpoints
+		ChooseCheckpoints ();
+		Debug.Log (checkpoint_Objects.Count);
+
 		// get components and objects
 
 		compass = player_Transform.Find ("camera_main/compass").GetComponent<Compass> ();
@@ -324,5 +328,39 @@ public class GameController : MonoBehaviour
 		foreach (GUIText text in remaining_Texts) {
 			text.text = remaining_String;
 		}
+	}
+
+	void ChooseCheckpoints ()
+	{
+		List<int> random_checkpoint_indices = new List<int> ();
+
+		List<Transform> random_checkpoint_transforms = new List<Transform> ();
+		List<GameObject> random_checkpoint_objects = new List<GameObject> ();
+
+		int next_number;
+		int target = ScoreManager.Instance.Checkpoints;
+
+		if (target >= checkpoint_Transforms.Count) {
+			Debug.Log ("Not enough checkpoints, reducing target.");
+			target = checkpoint_Transforms.Count - 1;	// don't get stuck in an infinite loop.
+		}
+
+		for (int i = 0; i < target; i++) {
+			do {
+				next_number = UnityEngine.Random.Range (0, checkpoint_Transforms.Count - 1);
+			} while (random_checkpoint_indices.Contains(next_number));
+			random_checkpoint_indices.Add (next_number);
+		}
+
+		foreach (var i in random_checkpoint_indices) {
+			random_checkpoint_transforms.Add (checkpoint_Transforms [i]);
+			random_checkpoint_objects.Add (checkpoint_Objects [i]);
+		}
+
+		random_checkpoint_transforms.Add (checkpoint_Transforms [checkpoint_Transforms.Count - 1]);
+		random_checkpoint_objects.Add (checkpoint_Objects [checkpoint_Objects.Count - 1]);
+
+		checkpoint_Transforms = random_checkpoint_transforms;
+		checkpoint_Objects = random_checkpoint_objects;
 	}
 }
