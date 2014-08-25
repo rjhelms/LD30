@@ -1,14 +1,21 @@
 To do:
 
 must haves!!!!:
-	- city: airport start, airport end
 	- fix pathfinder
 	- level transitions
-
+		- fade in/out with a message
+	- music
+	- more sound
 
 fix: pathfinder idiocy
+	- behaviour at end of chase
+	- getting stuck in driveways
 fix: screen tearing
 fix: movement - support arrow keys / azerty
+
+nice to haves:
+	- hideout behaviour - all cops immediately stop chasing, won't start again for some length of time
+	- random destinations from a list
 
 jungle level:
 
@@ -24,7 +31,6 @@ bad guys:
 		- when they sight player, chase him down
 			- player can ditch them by getting to a hideout
 			- should player have a boost, with limited capacity?
-		- make something happen with patrol catches player
 
 city level (in its entirety):
 	- also driving?

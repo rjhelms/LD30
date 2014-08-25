@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 	public Transform LevelTransform;
 	public Transform EntityTransform;
 	public float PlayerSpeed = 1.0f;
+	public float PlayerBoostSpeed = 5.0f;
 	public float PatrolSpeed = 1.0f;
 	public float PatrolChaseSpeed = 2.0f;
 	public float PatrolSightDistance = 2.0f;
@@ -26,7 +27,7 @@ public class GameController : MonoBehaviour
 	public int LoseScore;
 	public int WinLevel;
 	public int LoseLevel;
-
+	public int BoostCost;
 	#endregion
 
 	#region Private Fields
@@ -56,7 +57,7 @@ public class GameController : MonoBehaviour
 		checkpoint_Transforms = new List<Transform> ();
 		checkpoint_Objects = new List<GameObject> ();
 		patrol_Transforms = new List<Transform> ();
-		score_Texts = new List<GUIText>();
+		score_Texts = new List<GUIText> ();
 
 		// build the level
 		level_End = false;
@@ -72,9 +73,9 @@ public class GameController : MonoBehaviour
 
 		// initialize the pathfinder
 
-		aStarPath = Astar.GetComponent<AstarPath>();
-		aStarPath.UpdateGraphs(new Pathfinding.GraphUpdateObject());
-		aStarPath.Scan();
+		aStarPath = Astar.GetComponent<AstarPath> ();
+		aStarPath.UpdateGraphs (new Pathfinding.GraphUpdateObject ());
+		aStarPath.Scan ();
 
 		// build the patrollers - this needs to be done after the pathfinder is up
 
@@ -87,13 +88,12 @@ public class GameController : MonoBehaviour
 
 		// setup score GUI
 
-		foreach (GUIText text in FindObjectsOfType<GUIText>())
-		{
-			if (text.name.Contains("text_score"))
+		foreach (GUIText text in FindObjectsOfType<GUIText>()) {
+			if (text.name.Contains ("text_score"))
 				score_Texts.Add (text);
 		}
 
-		RenderScore();
+		RenderScore ();
 
 		Debug.Log ("Money: " + ScoreManager.Instance.Money);
 	}
@@ -125,9 +125,11 @@ public class GameController : MonoBehaviour
 
 	void PlayerMove ()
 	{
+		// zero out velocity
 		player_Rigidbody2D.velocity = Vector2.zero;
 		Vector2 newVelocity = new Vector2 (0, 0);
 
+		// process input
 		if (Input.GetKey (KeyCode.W)) {
 			newVelocity += Vector2.up;
 		}
@@ -141,14 +143,26 @@ public class GameController : MonoBehaviour
 			newVelocity += Vector2.right;
 		}
 
+		// set the player velocity
 		newVelocity.Normalize ();
-		player_Rigidbody2D.velocity = newVelocity * PlayerSpeed;
+		if (Input.GetKey (KeyCode.Q)) {
+			newVelocity *= PlayerBoostSpeed;
+			ScoreManager.Instance.Money -= Convert.ToInt32 (Math.Floor ((BoostCost * Time.fixedDeltaTime)));
+		} else {
+			newVelocity *= PlayerSpeed;
+		}
+		player_Rigidbody2D.velocity = newVelocity;
+
+		// adjust the pitch of the engine
+		float pitch = Mathf.Lerp (audio_Controller_Script.EnginePitch, newVelocity.magnitude / 3 + 0.33f, 0.2f);
+		audio_Controller_Script.EnginePitch = pitch;
 	}
 
 	void PointCompass ()
 	{
 		if (!level_End) {
-			Vector2 direction = (checkpoint_Transforms [next_Checkpoint].position - player_Transform.position).normalized;
+			Vector2 direction = (checkpoint_Transforms [next_Checkpoint].position - 
+			                     player_Transform.position).normalized;
 
 			if (direction.x < -0.85f) {																// W
 				compass.PointCompass (compass.SpriteW);
@@ -181,7 +195,8 @@ public class GameController : MonoBehaviour
 						float xpos = j;
 						float ypos = level_array.Length - (i + 2);		// an off-by-two error?
 						GameObject currentObject = Instantiate (LevelFileObjects [currentObjectIndex], 
-						                                        new Vector3 (xpos, ypos), transform.rotation) as GameObject;
+						                                        new Vector3 (xpos, ypos), transform.rotation) 
+							as GameObject;
 						Transform currentTransform = currentObject.GetComponent<Transform> ();
 						currentTransform.parent = LevelTransform;
 					}
@@ -198,7 +213,8 @@ public class GameController : MonoBehaviour
 				int currentObjectIndex = Convert.ToInt32 (currentObjectIndexString);
 				if (EntityFileObjects [currentObjectIndex] != null) {
 					GameObject currentObject = Instantiate (EntityFileObjects [currentObjectIndex], 
-					                                        new Vector3 (Convert.ToSingle (entity_array [i] [1]), Convert.ToSingle (entity_array [i] [2]), 0), 
+					                                        new Vector3 (Convert.ToSingle (entity_array [i] [1]), 
+					             							Convert.ToSingle (entity_array [i] [2]), 0), 
 					                                        transform.rotation) as GameObject;
 					Transform currentTransform = currentObject.GetComponent<Transform> ();
 					if (currentObjectIndex == 0) {			// 0 - the player
@@ -231,7 +247,8 @@ public class GameController : MonoBehaviour
 			string currentObjectIndexString = patrol_array [i] [0];
 			if (!string.IsNullOrEmpty (currentObjectIndexString)) {
 
-				Vector2 next_patrol_vector = new Vector2 (Convert.ToSingle (patrol_array [i] [1]), Convert.ToSingle (patrol_array [i] [2]));
+				Vector2 next_patrol_vector = new Vector2 (Convert.ToSingle (patrol_array [i] [1]), 
+				                                          Convert.ToSingle (patrol_array [i] [2]));
 				int patrol_index = Convert.ToInt32 (patrol_array [i] [0]);
 				Patrol currentPatrol = patrol_Transforms [patrol_index].GetComponent<Patrol> ();
 				currentPatrol.AddPatrolPoint (next_patrol_vector);
@@ -250,7 +267,7 @@ public class GameController : MonoBehaviour
 				if (next_Checkpoint == checkpoint_Transforms.Count) {
 					Debug.Log ("Level end!");
 					level_End = true;
-					Win();
+					Win ();
 				} else {
 					checkpoint_Objects [next_Checkpoint].SetActive (true);
 					ScoreManager.Instance.Money += CheckpointScore;
@@ -262,17 +279,17 @@ public class GameController : MonoBehaviour
 		} else {
 			Debug.Log ("Done level");
 		}
-	}	
-
-	public void Lose()
-	{
-		ScoreManager.Instance.Money += LoseScore;
-		Application.LoadLevel(LoseLevel);
 	}
 
-	public void Win()
+	public void Lose ()
 	{
-		Application.LoadLevel(WinLevel);
+		ScoreManager.Instance.Money += LoseScore;
+		Application.LoadLevel (LoseLevel);
+	}
+
+	public void Win ()
+	{
+		Application.LoadLevel (WinLevel);
 	}
 
 	void RenderScore ()

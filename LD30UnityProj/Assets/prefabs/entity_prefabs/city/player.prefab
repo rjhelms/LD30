@@ -142,7 +142,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 3.125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -221,14 +221,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71194bcbb60680041b763f275ac5d8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpriteW: {fileID: 21300016, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
-  SpriteNW: {fileID: 21300018, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
-  SpriteN: {fileID: 21300004, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
-  SpriteNE: {fileID: 21300006, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
-  SpriteE: {fileID: 21300008, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
-  SpriteSE: {fileID: 21300010, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
-  SpriteS: {fileID: 21300012, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
-  SpriteSW: {fileID: 21300014, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteW: {fileID: 21300032, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteNW: {fileID: 21300034, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteN: {fileID: 21300006, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteNE: {fileID: 21300010, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteE: {fileID: 21300014, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteSE: {fileID: 21300018, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteS: {fileID: 21300028, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
+  SpriteSW: {fileID: 21300030, guid: 61e49378eaa42644298c3716ab49182c, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

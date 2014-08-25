@@ -100,8 +100,9 @@ MonoBehaviour:
   LevelTransform: {fileID: 0}
   EntityTransform: {fileID: 0}
   PlayerSpeed: 5
+  PlayerBoostSpeed: 8
   PatrolSpeed: 2.5
-  PatrolChaseSpeed: 5.125
+  PatrolChaseSpeed: 5
   PatrolSightDistance: 2.75
   LevelFile: {fileID: 4900000, guid: 409f96d8515fe4646ba36ba14e65aeda, type: 3}
   EntityFile: {fileID: 4900000, guid: a3c1feaad8f010343b3535080246472c, type: 3}
@@ -137,6 +138,9 @@ MonoBehaviour:
   Astar: {fileID: 0}
   CheckpointScore: -1500
   LoseScore: -5000
+  WinLevel: 1
+  LoseLevel: 0
+  BoostCost: 100
 --- !u!132 &13200000
 GUIText:
   m_ObjectHideFlags: 1

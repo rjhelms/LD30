@@ -39,8 +39,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: 6a7b7f7efc6b8d34781707712dff1c92, type: 2}
   m_IsTrigger: 0
-  m_Size: {x: .100000001, y: .400000006}
-  m_Center: {x: .449999988, y: -.300000012}
+  m_Size: {x: .075000003, y: .400000006}
+  m_Center: {x: -.462500006, y: -.300000012}
 --- !u!61 &6100002
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -50,8 +50,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: 6a7b7f7efc6b8d34781707712dff1c92, type: 2}
   m_IsTrigger: 0
-  m_Size: {x: .100000001, y: .400000006}
-  m_Center: {x: -.449999988, y: -.300000012}
+  m_Size: {x: .075000003, y: .400000006}
+  m_Center: {x: -.462500006, y: -.300000012}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

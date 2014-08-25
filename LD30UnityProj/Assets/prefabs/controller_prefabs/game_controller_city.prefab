@@ -100,8 +100,9 @@ MonoBehaviour:
   LevelTransform: {fileID: 0}
   EntityTransform: {fileID: 0}
   PlayerSpeed: 5
+  PlayerBoostSpeed: 8
   PatrolSpeed: 2.5
-  PatrolChaseSpeed: 5.125
+  PatrolChaseSpeed: 5
   PatrolSightDistance: 2.75
   LevelFile: {fileID: 4900000, guid: 44eb3b42122fadc41a26b412c095e59c, type: 3}
   EntityFile: {fileID: 4900000, guid: f20890e41d81851489ade2dc726e01c9, type: 3}
@@ -136,9 +137,10 @@ MonoBehaviour:
   AudioControllerObject: {fileID: 0}
   Astar: {fileID: 0}
   CheckpointScore: 30000
-  LoseScore: -5000
+  LoseScore: -50000
   WinLevel: 0
   LoseLevel: 0
+  BoostCost: 1000
 --- !u!132 &13200000
 GUIText:
   m_ObjectHideFlags: 1
@@ -182,7 +184,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4289374720
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!1001 &100100000
