@@ -5,6 +5,7 @@ public class TitleScreenController : MonoBehaviour
 {
 
 	private bool is_Game_Starting = false;
+	private bool is_Instructions_Loading = false;
 	private SceneFadeInOut fader;
 
 	// Use this for initialization
@@ -16,8 +17,14 @@ public class TitleScreenController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.anyKeyDown) {
+		if (!is_Game_Starting && Input.GetKeyDown (KeyCode.I)) {
+			is_Instructions_Loading = true;
+		}
+		if (!is_Instructions_Loading && Input.anyKeyDown) {
 			is_Game_Starting = true;
+		}
+		if (is_Instructions_Loading) {
+			fader.EndScene (3);
 		}
 		if (is_Game_Starting) {
 			fader.EndScene (1);

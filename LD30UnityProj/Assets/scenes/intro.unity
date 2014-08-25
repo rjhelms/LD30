@@ -74,6 +74,50 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1001 &9833033
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 798764987}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+  m_RootGameObject: {fileID: 1126489793}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &28056628
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +142,7 @@ GUIText:
   m_GameObject: {fileID: 28056628}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: SMUGGLERS!
+  m_Text: Smugglers!
   m_Anchor: 1
   m_Alignment: 1
   m_PixelOffset: {x: 2, y: 2}
@@ -125,6 +169,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 798764987}
   m_RootOrder: 2
+--- !u!1 &238780652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 238780653}
+  - 132: {fileID: 238780654}
+  m_Layer: 0
+  m_Name: text_instructions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &238780653
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 238780652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: .125, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 798764987}
+  m_RootOrder: 6
+--- !u!132 &238780654
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 238780652}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: Press I for instructions
+  m_Anchor: 1
+  m_Alignment: 1
+  m_PixelOffset: {x: 0, y: 24}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 12800000, guid: 20a47f711493d5f43b836f30e68668bc, type: 3}
+  m_Material: {fileID: 0}
+  m_FontSize: 24
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4289374890
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!1 &367765599
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +307,7 @@ GUIText:
   m_GameObject: {fileID: 489984818}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: SMUGGLERS!
+  m_Text: Smugglers!
   m_Anchor: 1
   m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}
@@ -316,6 +411,7 @@ Transform:
   - {fileID: 1947470308}
   - {fileID: 1275975129}
   - {fileID: 1126489794}
+  - {fileID: 238780653}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!114 &798764990
@@ -332,8 +428,8 @@ MonoBehaviour:
 --- !u!1 &1126489793
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 100000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+  m_PrefabInternal: {fileID: 9833033}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1126489794}
@@ -349,8 +445,8 @@ GameObject:
 --- !u!4 &1126489794
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 400000, guid: 00339266b58740f48ba48cbe13dd659e, type: 2}
+  m_PrefabInternal: {fileID: 9833033}
   m_GameObject: {fileID: 1126489793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 12}
@@ -361,20 +457,22 @@ Transform:
 --- !u!114 &1126489795
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 11400000, guid: 00339266b58740f48ba48cbe13dd659e,
+    type: 2}
+  m_PrefabInternal: {fileID: 9833033}
   m_GameObject: {fileID: 1126489793}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb8ebae56339d434da2a23b08db764e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeSpeed: 1.5
+  FadeSpeed: 2
 --- !u!131 &1126489796
 GUITexture:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 13100000, guid: 00339266b58740f48ba48cbe13dd659e,
+    type: 2}
+  m_PrefabInternal: {fileID: 9833033}
   m_GameObject: {fileID: 1126489793}
   m_Enabled: 1
   m_Texture: {fileID: 2800000, guid: 70b993a8d504f594da5a0f3efc102865, type: 3}
@@ -425,7 +523,7 @@ GUIText:
   m_GameObject: {fileID: 1275975128}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: press any key to start
+  m_Text: Press any key to start
   m_Anchor: 1
   m_Alignment: 1
   m_PixelOffset: {x: 0, y: 0}
@@ -476,7 +574,7 @@ GUIText:
   m_GameObject: {fileID: 1947470307}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: SMUGGLERS!
+  m_Text: Smugglers!
   m_Anchor: 1
   m_Alignment: 1
   m_PixelOffset: {x: 4, y: 4}

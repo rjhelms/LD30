@@ -11,7 +11,7 @@ public class ScoreManager : Singleton<ScoreManager>
 	public int Money = 10000;
 	public int Checkpoints = 1;
 	public int Patrols {
-		get { return Mathf.CeilToInt (Convert.ToSingle (Checkpoints - 1) / 2);}
+		get { return (Checkpoints - 1);}
 	}
 	// Use this for initialization
 	void Start ()
