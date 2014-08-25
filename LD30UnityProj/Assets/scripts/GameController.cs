@@ -184,9 +184,12 @@ public class GameController : MonoBehaviour
 
 		// set the player velocity
 		newVelocity.Normalize ();
-		if (Input.GetKey (KeyCode.Space)) {
+		if ((Input.GetKey (KeyCode.Space) || Input.GetKey (KeyCode.LeftShift)) 
+			&& ScoreManager.Instance.Money > 0) { // can't boost when you're broke
 			newVelocity *= PlayerBoostSpeed;
 			ScoreManager.Instance.Money -= Convert.ToInt32 (Math.Floor ((BoostCost * Time.fixedDeltaTime)));
+			if (ScoreManager.Instance.Money < 0)	// don't put money into negative by boosting
+				ScoreManager.Instance.Money = 0;
 		} else {
 			newVelocity *= PlayerSpeed;
 		}
