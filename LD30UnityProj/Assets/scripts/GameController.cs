@@ -164,36 +164,39 @@ public class GameController : MonoBehaviour
 
 	void PlayerMove ()
 	{
-		// zero out velocity
-		player_Rigidbody2D.velocity = Vector2.zero;
 		Vector2 newVelocity = new Vector2 (0, 0);
+		if (!has_Lost) {									// you can't move if you're dead
+			// zero out velocity
+			player_Rigidbody2D.velocity = Vector2.zero;
+			newVelocity = new Vector2 (0, 0);
 
-		// process input
-		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.Z) || Input.GetKey (KeyCode.UpArrow)) {
-			newVelocity += Vector2.up;
-		}
-		if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
-			newVelocity -= Vector2.up;
-		}
-		if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.Q) || Input.GetKey (KeyCode.LeftArrow)) {
-			newVelocity -= Vector2.right;
-		}
-		if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.RightArrow)) {
-			newVelocity += Vector2.right;
-		}
+			// process input
+			if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.Z) || Input.GetKey (KeyCode.UpArrow)) {
+				newVelocity += Vector2.up;
+			}
+			if (Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.DownArrow)) {
+				newVelocity -= Vector2.up;
+			}
+			if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.Q) || Input.GetKey (KeyCode.LeftArrow)) {
+				newVelocity -= Vector2.right;
+			}
+			if (Input.GetKey (KeyCode.D) || Input.GetKey (KeyCode.RightArrow)) {
+				newVelocity += Vector2.right;
+			}
 
-		// set the player velocity
-		newVelocity.Normalize ();
-		if ((Input.GetKey (KeyCode.Space) || Input.GetKey (KeyCode.LeftShift)) 
-			&& ScoreManager.Instance.Money > 0) { // can't boost when you're broke
-			newVelocity *= PlayerBoostSpeed;
-			ScoreManager.Instance.Money -= Convert.ToInt32 (Math.Floor ((BoostCost * Time.fixedDeltaTime)));
-			if (ScoreManager.Instance.Money < 0)	// don't put money into negative by boosting
-				ScoreManager.Instance.Money = 0;
-		} else {
-			newVelocity *= PlayerSpeed;
+			// set the player velocity
+			newVelocity.Normalize ();
+			if ((Input.GetKey (KeyCode.Space) || Input.GetKey (KeyCode.LeftShift)) 
+				&& ScoreManager.Instance.Money > 0) { // can't boost when you're broke
+				newVelocity *= PlayerBoostSpeed;
+				ScoreManager.Instance.Money -= Convert.ToInt32 (Math.Floor ((BoostCost * Time.fixedDeltaTime)));
+				if (ScoreManager.Instance.Money < 0)	// don't put money into negative by boosting
+					ScoreManager.Instance.Money = 0;
+			} else {
+				newVelocity *= PlayerSpeed;
+			}
+			player_Rigidbody2D.velocity = newVelocity;
 		}
-		player_Rigidbody2D.velocity = newVelocity;
 
 		// adjust the pitch of the engine
 		float pitch = Mathf.Lerp (audio_Controller_Script.EnginePitch, newVelocity.magnitude / 3.6f + 0.33f, 0.2f);
@@ -351,14 +354,20 @@ public class GameController : MonoBehaviour
 		foreach (GUIText text in score_Texts) {
 			text.text = score_String;
 		}
-
 		int remaining_checkpoints = checkpoint_Transforms.Count - next_Checkpoint - 1;
-		if (is_Chased)
-			remaining_String = "Lose the cops!";
-		else if (remaining_checkpoints > 0)
-			remaining_String = "Remaining: " + remaining_checkpoints;
+		remaining_String = "";
+		if (is_Chased) {
+			remaining_String += "Lose the cops!\r\n";
+		} else if (remaining_checkpoints > 0) {
+			if (Application.loadedLevel % 2 != 0)
+				remaining_String += "Drop off the drugs!\r\n";
+			else
+				remaining_String += "Pick up the drugs!\r\n";
+		}
+		if (remaining_checkpoints > 0)
+			remaining_String += "Remaining: " + remaining_checkpoints;
 		else
-			remaining_String = "Get to the airport!";
+			remaining_String += "Get to the airport!";
 		foreach (GUIText text in remaining_Texts) {
 			text.text = remaining_String;
 		}

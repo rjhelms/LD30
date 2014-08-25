@@ -2,15 +2,13 @@ To do:
 
 must haves!!!!:
 	- level transitions
-		- fade in/out with a message
+		- a message?
 	- beef up jungle level
 	- music
 	- game win/lose scenarios
 	- intro screen?
 
-fix: pathfinder idiocy
-	- getting stuck in driveways? seems fixed
-
+fix: compass texture for jungle scene
 fix: screen tearing
 
 nice to haves:
