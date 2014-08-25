@@ -226,8 +226,8 @@ MonoBehaviour:
   Astar: {fileID: 0}
   CheckpointScore: 30000
   LoseScore: -50000
-  WinLevel: 0
-  LoseLevel: 0
+  WinLevel: 1
+  LoseLevel: 1
   BoostCost: 1000
   FadeSpeed: 1.5
 --- !u!114 &11400002

@@ -52,6 +52,8 @@ public class SceneFadeInOut : MonoBehaviour
     
 	public void EndScene (int level)
 	{
+		scene_Starting = false;
+
 		// Make sure the texture is enabled.
 		guiTexture.enabled = true;
         

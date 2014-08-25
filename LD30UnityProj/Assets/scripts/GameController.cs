@@ -376,7 +376,7 @@ public class GameController : MonoBehaviour
 	public void Win ()
 	{
 		if (!has_Lost && !has_Won) {
-			if (Application.loadedLevel % 2 != 0) {
+			if (Application.loadedLevel % 2 != 1) {
 				ScoreManager.Instance.Checkpoints++;
 			}
 		}
@@ -394,7 +394,7 @@ public class GameController : MonoBehaviour
 		if (is_Chased) {
 			remaining_String += "Lose the cops!\r\n";
 		} else if (remaining_checkpoints > 0) {
-			if (Application.loadedLevel % 2 != 0)
+			if (Application.loadedLevel % 2 != 1)
 				remaining_String += "Drop off the drugs!\r\n";
 			else
 				remaining_String += "Pick up the drugs!\r\n";

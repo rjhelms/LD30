@@ -109,6 +109,7 @@
      <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
      <Compile Include="Assets\AstarPathfindingProject\changelog.cs" />
      <Compile Include="Assets\SceneFadeInOut.cs" />
+     <Compile Include="Assets\TitleScreenController.cs" />
      <Compile Include="Assets\scripts\AudioController.cs" />
      <Compile Include="Assets\scripts\Compass.cs" />
      <Compile Include="Assets\scripts\GameController.cs" />
