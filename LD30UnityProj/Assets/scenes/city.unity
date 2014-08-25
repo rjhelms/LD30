@@ -754,7 +754,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c3c9f6356abcc6045978c10dbb02e1a1, type: 2}
       propertyPath: lastScanTime
-      value: .0580033995
+      value: .075004302
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c3c9f6356abcc6045978c10dbb02e1a1, type: 2}
       propertyPath: astarData.data.Array.data[11]
@@ -5228,6 +5228,10 @@ Prefab:
       propertyPath: astarData.data.Array.data[1276]
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c3c9f6356abcc6045978c10dbb02e1a1, type: 2}
+      propertyPath: showNavGraphs
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3c9f6356abcc6045978c10dbb02e1a1, type: 2}
   m_RootGameObject: {fileID: 2142386781}
@@ -5845,7 +5849,7 @@ MonoBehaviour:
     revertData: 
     cacheStartup: 0
     compress: 0
-  showNavGraphs: 1
+  showNavGraphs: 0
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
@@ -5907,7 +5911,7 @@ MonoBehaviour:
   minAreaSize: 10
   limitGraphUpdates: 1
   maxGraphUpdateFreq: .200000003
-  lastScanTime: .0580033995
+  lastScanTime: .075004302
   inGameDebugPath: 
   isScanning: 0
   showGraphs: 1

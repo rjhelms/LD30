@@ -390,7 +390,7 @@ MonoBehaviour:
     revertData: 
     cacheStartup: 0
     compress: 0
-  showNavGraphs: 1
+  showNavGraphs: 0
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
   minAreaSize: 10
   limitGraphUpdates: 1
   maxGraphUpdateFreq: .200000003
-  lastScanTime: .0530030988
+  lastScanTime: .0550031997
   inGameDebugPath: 
   isScanning: 0
   showGraphs: 1
@@ -845,7 +845,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c3c9f6356abcc6045978c10dbb02e1a1, type: 2}
       propertyPath: lastScanTime
-      value: .0530030988
+      value: .0550031997
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c3c9f6356abcc6045978c10dbb02e1a1, type: 2}
       propertyPath: astarData.data.Array.data[10]
@@ -5462,6 +5462,10 @@ Prefab:
     - target: {fileID: 11400000, guid: c3c9f6356abcc6045978c10dbb02e1a1, type: 2}
       propertyPath: astarData.data.Array.data[1261]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c3c9f6356abcc6045978c10dbb02e1a1, type: 2}
+      propertyPath: showNavGraphs
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c3c9f6356abcc6045978c10dbb02e1a1, type: 2}
