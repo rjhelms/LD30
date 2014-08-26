@@ -31,7 +31,7 @@ public class EndSceneController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.anyKeyDown) {
+		if (!fader.SceneStarting && Input.anyKeyDown) {
 			is_Game_Starting = true;
 		}
 		if (is_Game_Starting) {

@@ -5,7 +5,7 @@ public class SceneFadeInOut : MonoBehaviour
 {
 	public float FadeSpeed = 1.5f;          // Speed that the screen fades to and from black;
     
-	private bool scene_Starting = true;      // Whether or not the scene is still fading in.
+	public bool SceneStarting = true;      // Whether or not the scene is still fading in.
     
     
 	void Awake ()
@@ -18,7 +18,7 @@ public class SceneFadeInOut : MonoBehaviour
 	void Update ()
 	{
 		// If the scene is starting...
-		if (scene_Starting)
+		if (SceneStarting)
             // ... call the StartScene function.
 			StartScene ();
 	}
@@ -47,13 +47,13 @@ public class SceneFadeInOut : MonoBehaviour
 			guiTexture.enabled = false;
             
 			// The scene is no longer starting.
-			scene_Starting = false;
+			SceneStarting = false;
 		}
 	}
     
 	public void EndScene (int level)
 	{
-		scene_Starting = false;
+		SceneStarting = false;
 
 		// Make sure the texture is enabled.
 		guiTexture.enabled = true;

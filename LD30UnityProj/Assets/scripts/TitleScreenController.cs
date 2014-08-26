@@ -28,10 +28,10 @@ public class TitleScreenController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (!is_Game_Starting && Input.GetKeyDown (KeyCode.I)) {
+		if (!fader.SceneStarting && !is_Game_Starting && Input.GetKeyDown (KeyCode.I)) {
 			is_Instructions_Loading = true;
 		}
-		if (!is_Instructions_Loading && Input.anyKeyDown) {
+		if (!fader.SceneStarting && !is_Instructions_Loading && Input.anyKeyDown) {
 			is_Game_Starting = true;
 		}
 		if (is_Instructions_Loading) {
