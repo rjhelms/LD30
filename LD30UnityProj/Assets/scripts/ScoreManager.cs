@@ -10,6 +10,7 @@ public class ScoreManager : Singleton<ScoreManager>
 
 	public int StartingMoney = 15000;
 	public int StartingCheckpoints = 1;
+	public bool Muted = false;
 
 	public int Money = 15000;
 	public int Checkpoints = 1;
@@ -26,7 +27,7 @@ public class ScoreManager : Singleton<ScoreManager>
 	// Update is called once per frame
 	void Update ()
 	{
-	
+
 	}
 
 	public void Reset ()

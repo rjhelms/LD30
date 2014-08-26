@@ -125,7 +125,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .0500000007
+  m_Volume: .075000003
   m_Pitch: 0
   Loop: 1
   Mute: 0
@@ -241,7 +241,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .600000024
+  m_Volume: .5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Checkpoint: {fileID: 8300000, guid: 5ac22348e8484d34a899fef50fd66de7, type: 3}
   Engine: {fileID: 8300000, guid: aa4989e733227e140914afb436370339, type: 3}
-  Music: {fileID: 8300000, guid: 74a4faac277892d478bea2a2d59948c8, type: 3}
+  Music: {fileID: 8300000, guid: 13eea238d96f9b444972c23c8671dad6, type: 3}
   Lose: {fileID: 8300000, guid: cc8e7907298417647bfcc22d1147cb10, type: 3}
   FadeSpeed: 1.5
 --- !u!1001 &100100000

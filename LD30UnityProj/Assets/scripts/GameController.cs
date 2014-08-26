@@ -162,6 +162,12 @@ public class GameController : MonoBehaviour
 				current_patrol.FadeOut ();
 			}
 		}
+		if (Input.GetKeyDown (KeyCode.M)) {
+			if (!ScoreManager.Instance.Muted)
+				ScoreManager.Instance.Muted = true;
+			else if (ScoreManager.Instance.Muted)
+				ScoreManager.Instance.Muted = false;
+		}
 	}
 
 	void FixedUpdate ()

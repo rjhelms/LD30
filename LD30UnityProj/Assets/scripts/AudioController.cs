@@ -41,7 +41,14 @@ public class AudioController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		if (ScoreManager.Instance.Muted) {
+			music_source.Stop ();
+		} else {
+			if (!music_source.isPlaying) {
+				music_source.clip = Music;
+				music_source.Play ();
+			}
+		}
 	}
 
 	public void PlaySound (AudioClip sound)
